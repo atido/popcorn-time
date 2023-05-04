@@ -1,0 +1,176 @@
+:root {
+  --primary-color: #2c57a7;
+  --primary-color-hover: #007bef;
+  --secondary-color: #a6a4a4;
+  --error-color: #a94442;
+  --error-color-bg: #f2dede;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+a:hover {
+  text-decoration: underline;
+}
+.btn {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 0;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.btn--primary:hover {
+  background-color: var(--primary-color-hover);
+}
+.error {
+  background-color: var(--error-color-bg);
+  color: var(--error-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+/*
+██ ███    ██ ██████  ██    ██ ████████     
+██ ████   ██ ██   ██ ██    ██    ██        
+██ ██ ██  ██ ██████  ██    ██    ██        
+██ ██  ██ ██ ██      ██    ██    ██        
+██ ██   ████ ██       ██████     ██        
+*/
+.input__container {
+  position: relative;
+}
+.input__field {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  width: 100%;
+}
+.input__icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--primary-color);
+}
+.input__forgot {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+}
+
+/*
+███████ ██  ██████  ███    ██     
+██      ██ ██       ████   ██     
+███████ ██ ██   ███ ██ ██  ██     
+     ██ ██ ██    ██ ██  ██ ██     
+███████ ██  ██████  ██   ████     */
+
+.sign {
+  position: relative;
+  height: 100vh;
+  background-color: black;
+}
+.login {
+  background: url("../images/login-background.jpg") no-repeat center center / cover;
+}
+.signup {
+  background: url("../images/signup-background.png") no-repeat center center / cover;
+}
+.reset {
+  background: url("../images/reset-background.jpg") no-repeat center center / cover;
+}
+.sign__container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: 22rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 15px 10px rgb(0 0 0 / 0.2);
+}
+.sign__title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.sign__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.sign__logo {
+  position: absolute;
+  left: 50%;
+  top: -3rem;
+  transform: translate(-50%, 0);
+  height: 5rem;
+}
+
+.sign__bottom {
+  font-size: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid grey;
+  text-align: center;
+}
+/*
+██   ██ ███████  █████  ██████  ███████ ██████  
+██   ██ ██      ██   ██ ██   ██ ██      ██   ██ 
+███████ █████   ███████ ██   ██ █████   ██████  
+██   ██ ██      ██   ██ ██   ██ ██      ██   ██ 
+██   ██ ███████ ██   ██ ██████  ███████ ██   ██ */
+.header {
+  position: fixed;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+}
+.header__search {
+  padding-block: 0.5rem;
+}
+.header__logo {
+  height: 3rem;
+}
+
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../images/homepage-background-1.jpg") no-repeat center center / cover;
+  height: 60vh;
+}
+.hero__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+.hero__logo {
+  height: 6rem;
+}
+.hero__title {
+  color: white;
+  font-size: 3rem;
+}
