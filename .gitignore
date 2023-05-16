@@ -23,7 +23,6 @@ ehthumbs.db
 .vscode/*
 
 # yarn
-yarn.lock
 package-lock.json
 
 # test
