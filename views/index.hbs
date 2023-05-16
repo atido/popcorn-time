@@ -1,5 +1,5 @@
 <header class="header container">
-  <img src="/images/logo.png" alt="logo" class="header__logo" />
+  <a href="/"><img src="/images/logo.png" alt="logo" class="header__logo" /></a>
   <div class="header__searchbar">
     <div class="input__container"><svg
         class="input__icon"
@@ -26,6 +26,14 @@
   <div class="hero__content">
     <img src="/images/logo.png" alt="logo" class="hero__logo" />
     <h1 class="hero__title">POPCORN TIME</h1>
+    <p>Discover Movies and Best Recommendations for a perfect moment !</p>
+    <button class="btn btn--primary" type="submit">JOIN FOR FREE</button>
   </div>
+</section>
+<section id="trending" class="grid-cards">
+  {{>moviecardpartial this}}
+</section>
+<section id="popular" class="grid-cards">
+
 </section>
 <footer class="footer"></footer>

@@ -154,11 +154,20 @@ a:hover {
 .header__logo {
   height: 3rem;
 }
-
+.header__signin {
+  color: white;
+}
+/*
+██   ██ ███████ ██████   ██████      
+██   ██ ██      ██   ██ ██    ██     
+███████ █████   ██████  ██    ██     
+██   ██ ██      ██   ██ ██    ██     
+██   ██ ███████ ██   ██  ██████      */
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../images/homepage-background-1.jpg") no-repeat center center / cover;
   height: 60vh;
+  color: white;
 }
 .hero__content {
   display: flex;
@@ -166,11 +175,30 @@ a:hover {
   align-items: center;
   flex-direction: column;
   height: 100%;
+  width: 25rem;
+  margin: auto;
+  text-align: center;
+  gap: 1rem;
 }
 .hero__logo {
   height: 6rem;
 }
 .hero__title {
-  color: white;
   font-size: 3rem;
+}
+.hero__subtitle {
+  font-size: 1.5rem;
+}
+/*
+ ██████  █████  ██████  ██████      
+██      ██   ██ ██   ██ ██   ██     
+██      ███████ ██████  ██   ██     
+██      ██   ██ ██   ██ ██   ██     
+ ██████ ██   ██ ██   ██ ██████      */
+
+.card {
+}
+
+.card-footer {
+  background-color: #1d1d1d;
 }

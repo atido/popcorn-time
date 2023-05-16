@@ -26,3 +26,5 @@ ehthumbs.db
 yarn.lock
 package-lock.json
 
+# test
+coverage
