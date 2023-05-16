@@ -11,12 +11,24 @@ const express = require("express");
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
-const hbs = require("hbs");
+var exphbs = require("express-handlebars");
 const path = require("path");
-hbs.registerPartials(path.join(__dirname, "views/partials"));
+//hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 const app = express();
 
+var hbs = exphbs.create({
+  defaultLayout: "layout",
+  extname: ".hbs",
+  helpers: {
+    section: function (name, options) {
+      if (!this.sections) this.sections = {};
+      this.sections[name] = options.fn(this);
+      return null;
+    },
+  },
+});
+app.engine("hbs", hbs.engine);
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 

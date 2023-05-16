@@ -30,10 +30,38 @@
     <button class="btn btn--primary" type="submit">JOIN FOR FREE</button>
   </div>
 </section>
-<section id="trending" class="grid-cards">
-  {{>moviecardpartial this}}
+<section id="popular-movies">
+  <h2>Popular Movies</h2>
+  <div class="swiper-container swiper">
+    <div class="swiper-wrapper">
+      {{#each popularMovies}}
+        {{>moviecard.partial this}}
+      {{/each}}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 </section>
-<section id="popular" class="grid-cards">
+<section id="trending-movies" class="grid-cards">
+  <h2>Trending Movies</h2>
+  <div class="swiper-container swiper">
+    <div class="swiper-wrapper">
+      {{#each trendingMovies}}
+        {{>moviecard.partial this}}
+      {{/each}}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+<section id="popular-movies" class="grid-cards">
 
 </section>
 <footer class="footer"></footer>
+
+{{#section "css"}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+{{/section}}
+{{#section "script"}}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+{{/section}}

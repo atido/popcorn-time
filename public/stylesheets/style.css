@@ -4,6 +4,7 @@
   --secondary-color: #a6a4a4;
   --error-color: #a94442;
   --error-color-bg: #f2dede;
+  --swiper-theme-color: #fff;
 }
 
 * {
@@ -201,4 +202,37 @@ a:hover {
 
 .card-footer {
   background-color: #1d1d1d;
+}
+
+/*
+███████ ██     ██ ██ ██████  ███████ ██████      
+██      ██     ██ ██ ██   ██ ██      ██   ██     
+███████ ██  █  ██ ██ ██████  █████   ██████      
+     ██ ██ ███ ██ ██ ██      ██      ██   ██     
+███████  ███ ███  ██ ██      ███████ ██   ██     */
+.swiper {
+  width: 100%;
+  height: 150px;
+}
+.swiper-slide {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.swiper-slide img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.swiper-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: normal;
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0.9rem;
+  text-shadow: 0 0 20px #000;
 }

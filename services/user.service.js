@@ -3,12 +3,12 @@ const UserModel = require("../models/User.model");
 
 class UserService {
   constructor() {
-    this.MongooseServiceInstance = new MongooseService(UserModel);
+    this.mongooseService = new MongooseService(UserModel);
   }
 
   async create(userToCreate) {
     try {
-      return await this.MongooseServiceInstance.create(userToCreate);
+      return await this.mongooseService.create(userToCreate);
     } catch (err) {
       throw new Error("Error when creating user", err);
     }
@@ -16,7 +16,7 @@ class UserService {
 
   async findOne(query) {
     try {
-      return await this.MongooseServiceInstance.findOne(query);
+      return await this.mongooseService.findOne(query);
     } catch (err) {
       throw new Error("Error when finding user", err);
     }
@@ -24,7 +24,7 @@ class UserService {
 
   async delete(id) {
     try {
-      return await this.MongooseServiceInstance.delete(id);
+      return await this.mongooseService.delete(id);
     } catch (err) {
       throw new Error("Error when deleting user", err);
     }
