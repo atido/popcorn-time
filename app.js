@@ -8,27 +8,30 @@ require("./db");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
+const app = express();
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
-var exphbs = require("express-handlebars");
+var hbs = require("hbs");
 const path = require("path");
-//hbs.registerPartials(path.join(__dirname, "views/partials"));
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 
-const app = express();
-
-var hbs = exphbs.create({
-  defaultLayout: "layout",
-  extname: ".hbs",
-  helpers: {
-    section: function (name, options) {
-      if (!this.sections) this.sections = {};
-      this.sections[name] = options.fn(this);
-      return null;
-    },
-  },
+var blocks = {};
+hbs.registerHelper("extend", function (name, context) {
+  var block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
+  block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
 });
-app.engine("hbs", hbs.engine);
+
+hbs.registerHelper("block", function (name) {
+  var val = (blocks[name] || []).join("\n");
+  // clear the block
+  blocks[name] = [];
+  return val;
+});
+
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 

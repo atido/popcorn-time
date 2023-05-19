@@ -40,5 +40,14 @@ class MovieService {
       throw new Error("Error when searching movie", err);
     }
   }
+  async getMovieDetail(id) {
+    try {
+      const movieResult = await this.moviedb.movieInfo({ id });
+      console.log(movieResult);
+      return MovieMapper.toMovieDetailDTO(movieResult);
+    } catch (err) {
+      throw new Error("Error when searching movie", err);
+    }
+  }
 }
 module.exports = MovieService;

@@ -1,5 +1,5 @@
 function getResetForm(req, res, next) {
-  res.render("auth/reset", { layout: "layoutSimple" });
+  res.render("auth/reset", { layout: "layouts/layoutSimple" });
 }
 
 module.exports = { getResetForm };

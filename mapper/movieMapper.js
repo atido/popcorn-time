@@ -8,7 +8,9 @@ class MovieMapper {
       vote: movieFromApi.vote_average,
     };
   }
-  toMovieDetailDTO(movieDetailFromApi) {}
+  static toMovieDetailDTO(movieDetailFromApi) {
+    return movieDetailFromApi;
+  }
 }
 
 module.exports = MovieMapper;

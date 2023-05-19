@@ -9,15 +9,15 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
-    {{{sections.css}}}
     <title>{{appTitle}}</title>
+    {{{block "css"}}}
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
   <body>
     {{>header.partial}}
     {{{body}}}
-    {{{sections.script}}}
+    {{{block "scripts"}}}
     <script src="/js/script.js"></script>
   </body>
 
