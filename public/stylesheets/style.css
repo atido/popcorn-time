@@ -142,12 +142,14 @@ a:hover {
 ██   ██ ███████ ██   ██ ██████  ███████ ██   ██ */
 .header {
   position: fixed;
+  top: 0;
   height: 4rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-inline: 1rem;
+  z-index: 1000;
 }
 .header__search {
   padding-block: 0.5rem;
@@ -190,19 +192,6 @@ a:hover {
 .hero__subtitle {
   font-size: 1.5rem;
 }
-/*
- ██████  █████  ██████  ██████      
-██      ██   ██ ██   ██ ██   ██     
-██      ███████ ██████  ██   ██     
-██      ██   ██ ██   ██ ██   ██     
- ██████ ██   ██ ██   ██ ██████      */
-
-.card {
-}
-
-.card-footer {
-  background-color: #1d1d1d;
-}
 
 /*
 ███████ ██     ██ ██ ██████  ███████ ██████      
@@ -215,6 +204,7 @@ a:hover {
   height: 150px;
 }
 .swiper-slide {
+  position: relative;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -235,4 +225,15 @@ a:hover {
   bottom: 0.8rem;
   left: 0.9rem;
   text-shadow: 0 0 20px #000;
+}
+
+/*
+███    ███  ██████  ██    ██ ██ ███████     ██      ██ ███████ ████████ 
+████  ████ ██    ██ ██    ██ ██ ██          ██      ██ ██         ██    
+██ ████ ██ ██    ██ ██    ██ ██ █████       ██      ██ ███████    ██    
+██  ██  ██ ██    ██  ██  ██  ██ ██          ██      ██      ██    ██    
+██      ██  ██████    ████   ██ ███████     ███████ ██ ███████    ██    */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }

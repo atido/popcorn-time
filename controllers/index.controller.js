@@ -1,24 +1,15 @@
-const { MovieDb } = require("moviedb-promise");
-const MovieDTO = require("../dto/movieDTO");
-const moviedb = new MovieDb(process.env.TMDB_API_KEY, process.env.TMDB_API_URL);
+const MovieService = require("../services/movie.service");
+const movieService = new MovieService();
 
-async function getMovies(req, res, next) {
+async function getHomePage(req, res, next) {
   try {
-    const popularMoviesFromApi = await moviedb.moviePopular();
+    const popularMovies = await movieService.getPopularMovies();
+    const trendingMovies = await movieService.getTrendingMovies();
 
-    const trendingMoviesFromApi = await moviedb.trending({
-      media_type: "movie",
-      time_window: "week",
-    });
-    return res.render("index", {
-      popularMovies: popularMoviesFromApi.results.map((movieFromApi) => new MovieDTO(movieFromApi)),
-      trendingMovies: trendingMoviesFromApi.results.map(
-        (movieFromApi) => new MovieDTO(movieFromApi)
-      ),
-    });
+    return res.render("index", { popularMovies, trendingMovies });
   } catch (err) {
     next(err);
   }
 }
 
-module.exports = { getMovies };
+module.exports = { getHomePage };

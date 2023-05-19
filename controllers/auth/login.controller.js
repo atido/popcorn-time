@@ -4,7 +4,7 @@ const UserService = require("../../services/user.service");
 const userService = new UserService();
 
 function getLoginForm(req, res, next) {
-  res.render("auth/login");
+  res.render("auth/login", { layout: "layoutSimple" });
 }
 
 async function login(req, res, next) {
@@ -20,7 +20,10 @@ async function login(req, res, next) {
       req.session.currentUser = { _id, email, username };
       return res.redirect("/profile");
     } else {
-      return res.status(401).render("auth/login", { message: "Wrong email or password" });
+      return res.status(401).render("auth/login", {
+        layout: "layoutSimple",
+        data: { message: "Wrong email or password" },
+      });
     }
   } catch (err) {
     next(err);

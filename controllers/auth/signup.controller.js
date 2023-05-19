@@ -2,7 +2,7 @@ const UserService = require("../../services/user.service");
 const userService = new UserService();
 
 function getSignupForm(req, res, next) {
-  res.render("auth/signup");
+  res.render("auth/signup", { layout: "layoutSimple" });
 }
 
 async function createSignup(req, res, next) {
@@ -14,7 +14,10 @@ async function createSignup(req, res, next) {
   try {
     const foundUser = await userService.findOne({ email });
     if (foundUser) {
-      return res.render("auth/signup", { message: "User already exists" });
+      return res.render("auth/signup", {
+        layout: "layoutSimple",
+        data: { message: "User already exists" },
+      });
     }
     await userService.create({ email, password, username });
     return res.render("profile");
