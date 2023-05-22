@@ -1,5 +1,18 @@
-<section class="hero" style="background-image:url('{{movie.backdrop_img}}')">
+<section class="hero movie-detail" style="background-image:url('{{movie.backdrop_img}}')">
   <div class="hero__content">
-
+    <h2 class="hero__title">{{movie.title}}</h2>
   </div>
 </section>
+<section class="movie__container">
+  <img class="movie__poster" src="{{movie.poster_img}}" alt="{{movie.title}}" />
+  <button id="openWathProviderModal">open</button>
+  <dialog id="watchProviderModal">
+    test
+    <button id="closeWathProviderModal">close</button>
+  </dialog>
+
+</section>
+
+{{#extend "scripts"}}
+  <script src="/js/dialog.js"></script>
+{{/extend}}

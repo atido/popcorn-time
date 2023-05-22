@@ -43,10 +43,27 @@ class MovieService {
   async getMovieDetail(id) {
     try {
       const movieResult = await this.moviedb.movieInfo({ id });
-      console.log(movieResult);
       return MovieMapper.toMovieDetailDTO(movieResult);
     } catch (err) {
       throw new Error("Error when getting movie", err);
+    }
+  }
+  async getMovieWatchProviders(id) {
+    try {
+      const movieWatchProvidersResult = await this.moviedb.movieWatchProviders({ id });
+      const movieWatchProviders = {};
+      movieWatchProviders.flatrate = movieWatchProvidersResult.results.FR.flatrate.map((provider) =>
+        MovieMapper.toMovieWatchProvidersDTO(provider)
+      );
+      movieWatchProviders.buy = movieWatchProvidersResult.results.FR.buy.map((provider) =>
+        MovieMapper.toMovieWatchProvidersDTO(provider)
+      );
+      movieWatchProviders.rent = movieWatchProvidersResult.results.FR.rent.map((provider) =>
+        MovieMapper.toMovieWatchProvidersDTO(provider)
+      );
+      return movieWatchProviders;
+    } catch (err) {
+      throw new Error("Error when getting watch providers", err);
     }
   }
 }

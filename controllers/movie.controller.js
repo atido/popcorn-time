@@ -16,7 +16,9 @@ async function searchMovie(req, res, next) {
 async function getMovieDetail(req, res, next) {
   try {
     const movie = await movieService.getMovieDetail(req.params.id);
-    return res.render("movie/movieDetail", { movie });
+    const movieWatchProviders = await movieService.getMovieWatchProviders(req.params.id);
+    console.log(movieWatchProviders);
+    return res.render("movie/movieDetail", { movie, movieWatchProviders, headerPosition: "fixed" });
   } catch (err) {
     next(err);
   }

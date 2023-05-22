@@ -6,15 +6,18 @@
   --error-color-bg: #f2dede;
   --swiper-theme-color: #fff;
 }
-
-* {
+*:not(dialog) {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   font-family: "Montserrat", sans serif;
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.4);
 }
 
 h1 {
@@ -26,7 +29,6 @@ h2 {
 h3 {
   font-size: 1.5rem;
 }
-
 a {
   text-decoration: none;
   color: var(--primary-color);
@@ -38,6 +40,9 @@ a:hover {
   width: 20px;
   height: 20px;
   color: var(--primary-color);
+}
+img {
+  display: block;
 }
 .btn {
   margin-bottom: 1rem;
@@ -165,7 +170,7 @@ a:hover {
 }
 .header.fixed {
   position: fixed;
-  background: inherit;
+  background: rgba(44, 87, 167, 0.5);
 }
 .header__search {
   padding-block: 0.5rem;
@@ -184,8 +189,10 @@ a:hover {
 ██   ██ ███████ ██   ██  ██████      */
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/homepage-background-1.jpg") no-repeat center center / cover;
+    url("../images/homepage-background-1.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   height: 60vh;
   color: white;
 }
@@ -202,6 +209,19 @@ a:hover {
 }
 .hero__logo {
   height: 6rem;
+}
+.hero.movie-detail {
+  background-position: 50% 10%;
+  height: 50vh;
+}
+.hero.movie-detail .hero__content {
+  height: 50vh;
+  width: min(100ch, calc(100% - 3rem));
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.hero.movie-detail .hero__title {
+  margin-left: 12rem;
 }
 
 /*
@@ -269,4 +289,16 @@ a:hover {
   .movies-list {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.movie__container {
+  width: min(100ch, calc(100% - 3rem));
+  margin-inline: auto;
+}
+.movie__poster {
+  max-width: 100%;
+  height: auto;
+  border: solid 3px #fff;
+  box-shadow: 0 0 20px 0 #666;
+  margin-top: -150px;
 }
