@@ -36,7 +36,7 @@ router.get("/reset", isLoggedOut, (req, res, next) => ResetController.getResetFo
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      res.status(500).render("auth/logout", { message: err.message });
+      res.status(500).render("auth/logout", { layouts: "layouts/auth", message: err.message });
       return;
     }
     res.redirect("/");

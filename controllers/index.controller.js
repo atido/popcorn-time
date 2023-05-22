@@ -6,7 +6,7 @@ async function getHomePage(req, res, next) {
     const popularMovies = await movieService.getPopularMovies();
     const trendingMovies = await movieService.getTrendingMovies();
 
-    return res.render("index", { popularMovies, trendingMovies });
+    return res.render("index", { popularMovies, trendingMovies, headerPosition: "fixed" });
   } catch (err) {
     next(err);
   }

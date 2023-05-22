@@ -4,7 +4,7 @@ const UserService = require("../../services/user.service");
 const userService = new UserService();
 
 function getLoginForm(req, res, next) {
-  res.render("auth/login", { layout: "layouts/layoutSimple" });
+  res.render("auth/login", { layout: "layouts/auth" });
 }
 
 async function login(req, res, next) {
@@ -13,7 +13,7 @@ async function login(req, res, next) {
   const result = userService.validateLogin(email, password);
   if (!result.success)
     return res.render("auth/login", {
-      layout: "layouts/layoutSimple",
+      layout: "layouts/auth",
       message: result.message,
     });
 
@@ -22,10 +22,10 @@ async function login(req, res, next) {
     if (foundUser && bcrypt.compareSync(password, foundUser.password)) {
       const { _id, email, username } = foundUser;
       req.session.currentUser = { _id, email, username };
-      return res.redirect("/profile");
+      return res.redirect("/dashboard");
     } else {
       return res.status(401).render("auth/login", {
-        layout: "layouts/layoutSimple",
+        layout: "layouts/auth",
         message: "Wrong email or password",
       });
     }

@@ -46,7 +46,7 @@ class MovieService {
       console.log(movieResult);
       return MovieMapper.toMovieDetailDTO(movieResult);
     } catch (err) {
-      throw new Error("Error when searching movie", err);
+      throw new Error("Error when getting movie", err);
     }
   }
 }
