@@ -52,13 +52,13 @@ class MovieService {
     try {
       const movieWatchProvidersResult = await this.moviedb.movieWatchProviders({ id });
       const movieWatchProviders = {};
-      movieWatchProviders.flatrate = movieWatchProvidersResult.results.FR.flatrate.map((provider) =>
+      movieWatchProviders.flatrate = movieWatchProvidersResult.results.FR?.flatrate?.map(
+        (provider) => MovieMapper.toMovieWatchProvidersDTO(provider)
+      );
+      movieWatchProviders.buy = movieWatchProvidersResult.results.FR?.buy?.map((provider) =>
         MovieMapper.toMovieWatchProvidersDTO(provider)
       );
-      movieWatchProviders.buy = movieWatchProvidersResult.results.FR.buy.map((provider) =>
-        MovieMapper.toMovieWatchProvidersDTO(provider)
-      );
-      movieWatchProviders.rent = movieWatchProvidersResult.results.FR.rent.map((provider) =>
+      movieWatchProviders.rent = movieWatchProvidersResult.results.FR?.rent?.map((provider) =>
         MovieMapper.toMovieWatchProvidersDTO(provider)
       );
       return movieWatchProviders;
