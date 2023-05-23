@@ -61,9 +61,21 @@ class MovieService {
       movieWatchProviders.rent = movieWatchProvidersResult.results.FR?.rent?.map((provider) =>
         MovieMapper.toMovieWatchProvidersDTO(provider)
       );
+      movieWatchProviders.resultsNumber =
+        movieWatchProviders.flatrate?.length +
+        movieWatchProviders.buy?.length +
+        movieWatchProviders.rent?.length;
       return movieWatchProviders;
     } catch (err) {
       throw new Error("Error when getting watch providers", err);
+    }
+  }
+  async getMovieActors(id) {
+    try {
+      const actorsResult = await this.moviedb.movieCredits({ id });
+      return actorsResult.cast.map((actor) => MovieMapper.toMovieActorsDTO(actor));
+    } catch (err) {
+      throw new Error("Error when getting actors", err);
     }
   }
 }

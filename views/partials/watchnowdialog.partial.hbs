@@ -1,0 +1,27 @@
+<dialog id="watchProviderModal">
+    {{#if this.flatrate}}
+      <h3>Streaming</h3>
+      <div class="movie__providers">
+      {{#each this.flatrate}}
+        {{>movieprovider.partial this}}
+      {{/each}}
+      </div>
+    {{/if}}
+    {{#if this.rent}}
+      <h3>Rent</h3>
+      <div class="movie__providers">
+      {{#each this.rent}}
+        {{>movieprovider.partial this}}
+      {{/each}}
+      </div>
+    {{/if}}
+    {{#if this.buy}}
+      <h3>Buy</h3>
+      <div class="movie__providers">
+      {{#each this.buy}}
+        {{>movieprovider.partial this}}
+      {{/each}}
+      </div>
+    {{/if}}
+    <button class="btn btn__watchnow--close" id="closeWatchProviderModal">X</button>
+  </dialog>

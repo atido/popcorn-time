@@ -4,15 +4,63 @@
   </div>
 </section>
 <section class="movie__container">
-  <img class="movie__poster" src="{{movie.poster_img}}" alt="{{movie.title}}" />
-  <button id="openWathProviderModal">open</button>
-  <dialog id="watchProviderModal">
-    test
-    <button id="closeWathProviderModal">close</button>
-  </dialog>
+  <aside class="movie__sidebar">
+    <img class="movie__poster" src="{{movie.poster_img}}" alt="{{movie.title}}" />
+    {{#if movie.watchProviders.resultsNumber}}
+    <button id="openWathProviderModal" class="btn btn--secondary btn--full-width btn__watchnow">
+      <div class="movie__watchnow">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          width="448"
+          height="512"
+          viewBox="0 0 448 512"
+        ><path
+            fill="currentColor"
+            d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+          /></svg>
+        Watch Now
+        </div>
+        <small>{{movie.watchProviders.resultsNumber}} services</small>
+    </button>
+    {{>watchnowdialog.partial movie.watchProviders}}
+    {{/if}}
+  </aside>
+  <div class="movie__content">
+    <ul class="movie__info">
+        <li><span>Released </span>{{movie.release_date}}</li>
+        <li><span>Runtime </span> {{movie.runtime}}</li>
+        <li><span>Genres </span>
+            {{#each movie.genres}}
+                {{this}}
+            {{/each}}
+        </li>
+    </ul>
+    <div class="movie__overview">
+        <h3>Overview</h3>
+        <p>{{movie.overview}}</p>
+    </div>
+    <div class="movie__actors">
+        <h3>Actors</h3>
+        <h5>Cast</h5>
+          <div class="swiper-container swiper">
+        <div class="swiper-wrapper">
+            {{#each movie.actors}}
+                {{>movieactor.partial this}}
+            {{/each}}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div> 
+  </div>
 
 </section>
 
+{{#extend "css"}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+{{/extend}}
 {{#extend "scripts"}}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="/js/swiper.js"></script>
   <script src="/js/dialog.js"></script>
 {{/extend}}

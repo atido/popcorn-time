@@ -1,10 +1,14 @@
 const watchProviderModal = document.getElementById("watchProviderModal");
 const openModal = document.getElementById("openWathProviderModal");
-const closeModal = document.getElementById("closeWathProviderModal");
+const closeModal = document.getElementById("closeWatchProviderModal");
 
-openModal.addEventListener("click", () => {
-  watchProviderModal.showModal();
-});
-closeModal.addEventListener("click", () => {
-  watchProviderModal.close();
-});
+if (openModal) {
+  openModal.addEventListener("click", () => {
+    watchProviderModal.showModal();
+  });
+}
+if (closeModal) {
+  closeModal.addEventListener("click", () => {
+    watchProviderModal.close();
+  });
+}
