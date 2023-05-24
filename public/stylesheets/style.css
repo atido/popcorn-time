@@ -266,9 +266,13 @@ img {
   align-items: flex-start;
 }
 .hero.movie-detail .hero__title {
-  margin-left: 12rem;
+  margin-left: 4rem;
 }
-
+@media screen and (min-width: 768px) {
+  .hero.movie-detail .hero__title {
+    margin-left: 11rem;
+  }
+}
 /*
 ███████ ██     ██ ██ ██████  ███████ ██████      
 ██      ██     ██ ██ ██   ██ ██      ██   ██     
@@ -352,7 +356,12 @@ img {
   height: auto;
   border: solid 3px #fff;
   box-shadow: 0 0 20px 0 #666;
-  margin-top: -150px;
+  margin-top: -4rem;
+}
+@media screen and (min-width: 768px) {
+  .movie__poster {
+    margin-top: -150px;
+  }
 }
 .movie__watchnow {
   display: flex;

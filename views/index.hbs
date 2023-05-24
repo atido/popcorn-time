@@ -6,35 +6,4 @@
     <a class="btn btn--primary" href="/auth/signup">JOIN FOR FREE</a>
   </div>
 </section>
-<section id="popular-movies">
-  <h2>Popular Movies</h2>
-  <div class="swiper-container swiper">
-    <div class="swiper-wrapper">
-      {{#each popularMovies}}
-        {{>moviecard.partial this}}
-      {{/each}}
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</section>
-<section id="trending-movies" class="grid-cards">
-  <h2>Trending Movies</h2>
-  <div class="swiper-container swiper">
-    <div class="swiper-wrapper">
-      {{#each trendingMovies}}
-        {{>moviecard.partial this}}
-      {{/each}}
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</section>
-
-{{#extend "css"}}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-{{/extend}}
-{{#extend "scripts"}}
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="/js/swiper.js"></script>
-{{/extend}}
+{{>featuredmovies.partial featuredMovies}}
