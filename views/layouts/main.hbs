@@ -16,8 +16,10 @@
 
   <body>
     {{>header.partial parameter=mode}}
-    {{{body}}}
-    {{{block "scripts"}}}
+    <main>
+      {{{body}}}
+      {{{block "scripts"}}}
+    </main>
     {{>footer.partial}}
   </body>
 

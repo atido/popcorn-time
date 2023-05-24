@@ -16,6 +16,16 @@
 
 body {
   font-family: "Montserrat", sans serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex-grow: 1;
+}
+
+section {
+  margin-bottom: 1rem;
 }
 
 dialog::backdrop {
@@ -180,7 +190,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 1rem;
+  gap: 1rem;
   z-index: 1000;
 }
 .header.fixed {
@@ -192,7 +202,9 @@ img {
 }
 .header__signin {
   color: white;
+  font-size: 0.8rem;
 }
+
 /*
 ███████  ██████   ██████  ████████ ███████ ██████  
 ██      ██    ██ ██    ██    ██    ██      ██   ██ 
@@ -203,9 +215,9 @@ img {
   background-color: var(--primary-color);
   padding-block: 0.5rem;
   padding-inline: 1rem;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 0;*/
   width: 100%;
   display: flex;
   justify-content: space-between;
