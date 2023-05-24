@@ -265,7 +265,7 @@ img {
 ███████  ███ ███  ██ ██      ███████ ██   ██     */
 .swiper {
   width: 100%;
-  height: 150px;
+  height: auto;
 }
 .swiper-slide {
   position: relative;
@@ -286,7 +286,7 @@ img {
   font-size: 1.2rem;
   font-weight: normal;
   position: absolute;
-  bottom: 0.8rem;
+  bottom: 0.5rem;
   left: 0.9rem;
   text-shadow: 0 0 20px #000;
 }
@@ -397,7 +397,6 @@ img {
 }
 .movie__actors .swiper {
   text-align: center;
-  height: 250px;
 }
 .actor__name {
   color: var(--color-label);
