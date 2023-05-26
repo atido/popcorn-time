@@ -6,7 +6,8 @@
   --error-color: #a94442;
   --error-color-bg: #f2dede;
   --swiper-theme-color: #fff;
-  --color-label: #959595;
+  --label-color: #959595;
+  --actions-color: #1d1d1d;
 }
 *:not(dialog) {
   box-sizing: border-box;
@@ -41,6 +42,9 @@ h2 {
 h3 {
   font-size: 1.5rem;
 }
+h4 {
+  font-size: 1.1rem;
+}
 a {
   text-decoration: none;
   color: var(--primary-color);
@@ -53,8 +57,16 @@ a:hover {
   height: 20px;
   color: var(--primary-color);
 }
+.icon--purple {
+  color: #8e44ad;
+}
+.icon--blue {
+  color: #2b678f;
+}
 img {
   display: block;
+  width: auto;
+  height: 100%;
 }
 .btn {
   margin-bottom: 1rem;
@@ -89,6 +101,31 @@ img {
 }
 .logo {
   height: 3rem;
+}
+.avatar {
+  border: 3px solid white;
+  border-radius: 50%;
+}
+.icon__withtooltip {
+  position: relative;
+}
+.icon__withtooltip .tooltiptext {
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.icon__withtooltip:hover .tooltiptext {
+  visibility: visible;
 }
 /*
 ██ ███    ██ ██████  ██    ██ ████████     
@@ -204,6 +241,9 @@ img {
   color: white;
   font-size: 0.8rem;
 }
+.header__avatar {
+  height: 30px;
+}
 
 /*
 ███████  ██████   ██████  ████████ ███████ ██████  
@@ -215,9 +255,6 @@ img {
   background-color: var(--primary-color);
   padding-block: 0.5rem;
   padding-inline: 1rem;
-  /* position: fixed;
-  left: 0;
-  bottom: 0;*/
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -234,7 +271,7 @@ img {
 ██   ██ ███████ ██   ██  ██████      */
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/homepage-background-1.jpg");
+    url("../images/homepage-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -273,6 +310,21 @@ img {
     margin-left: 11rem;
   }
 }
+#dashboard .hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../images/dashboard-background.jpg");
+}
+#dashboard .hero__content {
+  backdrop-filter: blur(4px);
+  height: 60vh;
+  width: auto;
+  flex-direction: row;
+}
+#dashboard .hero__logo {
+  width: 4rem;
+  height: auto;
+}
+
 /*
 ███████ ██     ██ ██ ██████  ███████ ██████      
 ██      ██     ██ ██ ██   ██ ██      ██   ██     
@@ -299,11 +351,10 @@ img {
 }
 .swiper-title {
   color: white;
-  font-size: 1.2rem;
   font-weight: normal;
   position: absolute;
-  bottom: 0.5rem;
-  left: 0.9rem;
+  bottom: 2.5rem;
+  left: 0.8rem;
   text-shadow: 0 0 20px #000;
 }
 
@@ -414,11 +465,20 @@ img {
 }
 .movie__info li span {
   text-transform: uppercase;
-  color: var(--color-label);
+  color: var(--label-color);
+}
+.movie__actions {
+  background-color: var(--actions-color);
+  height: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.5rem;
 }
 .movie__actors .swiper {
   text-align: center;
 }
 .actor__name {
-  color: var(--color-label);
+  color: var(--label-color);
 }

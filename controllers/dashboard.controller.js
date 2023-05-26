@@ -9,7 +9,6 @@ async function getDashboardPage(req, res, next) {
 
     return res.render("dashboard", {
       featuredMovies,
-      user: req.session.currentUser,
     });
   } catch (err) {
     next(err);

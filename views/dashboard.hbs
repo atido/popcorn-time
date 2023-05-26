@@ -1,4 +1,9 @@
-<img src="" alt="avatar">
-<h1>Welcome, {{user.username}}</h1>
-{{>featuredmovies.partial featuredMovies}}
-
+<div id="dashboard">
+    <section class="hero">
+        <div class="hero__content">
+            <img class="hero__logo avatar" src="{{user.avatar}}" alt="avatar">
+            <h1 class="hero__title">Welcome, {{user.username}}</h1>
+        </div>
+    </section>
+    {{>featuredmovies.partial featuredMovies}}
+</div>

@@ -37,6 +37,12 @@ require("./config")(app);
 
 require("./config/session")(app);
 
+// User in session for front
+app.use(function (req, res, next) {
+  res.locals.user = req.session.currentUser;
+  next();
+});
+
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);

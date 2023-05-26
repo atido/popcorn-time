@@ -22,5 +22,11 @@
       </div>
     </form>
   </div>
-  <a class="header__signin" href="/auth/login">SIGN IN</a>
+  <div class="header__user-nav">
+    {{#if user}}
+      <img class="header__avatar avatar" src="{{user.avatar}}" alt="avatar" />
+    {{else}}
+      <a class="header__signin" href="/auth/login">SIGN IN</a>
+    {{/if}}
+  </div>
 </header>
