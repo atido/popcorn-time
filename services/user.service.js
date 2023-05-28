@@ -22,6 +22,14 @@ class UserService {
     }
   }
 
+  async findOneAndUpdate(query, body) {
+    try {
+      return await this.mongooseService.findOneAndUpdate(query, body);
+    } catch (err) {
+      throw new Error("Error when finding user", err);
+    }
+  }
+
   async delete(id) {
     try {
       return await this.mongooseService.delete(id);

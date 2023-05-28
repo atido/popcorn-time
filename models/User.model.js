@@ -22,6 +22,9 @@ const userSchema = new Schema(
     avatar: {
       type: String,
     },
+    watched: {
+      type: [String],
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

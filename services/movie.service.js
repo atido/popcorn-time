@@ -1,9 +1,9 @@
 const MovieMapper = require("../mapper/movieMapper");
-const { MovieDb } = require("moviedb-promise");
+const { MovieDb: MovieDbApi } = require("moviedb-promise");
 
 class MovieService {
   constructor() {
-    this.moviedb = new MovieDb(process.env.TMDB_API_KEY, process.env.TMDB_API_URL);
+    this.moviedb = new MovieDbApi(process.env.TMDB_API_KEY, process.env.TMDB_API_URL);
   }
 
   async getPopularMovies() {

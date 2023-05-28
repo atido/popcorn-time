@@ -113,15 +113,16 @@ img {
   position: absolute;
   z-index: 1;
   visibility: hidden;
-  background-color: black;
+  background-color: var(--actions-color);
   color: #fff;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
-  width: 120px;
+  width: 8rem;
   bottom: 100%;
   left: 50%;
-  margin-left: -60px;
+  transform: translate(-50%);
+  font-size: 0.8rem;
 }
 
 .icon__withtooltip:hover .tooltiptext {
@@ -473,12 +474,32 @@ img {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding-inline: 0.5rem;
 }
 .movie__actors .swiper {
   text-align: center;
 }
 .actor__name {
   color: var(--label-color);
+}
+.action {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.watch:hover,
+.watch.selected {
+  background-color: #8e44ad;
+}
+.watchList:hover,
+.watchList.selected {
+  background-color: #2b678f;
+}
+
+.watch:hover .icon,
+.watchList:hover .icon,
+.watch.selected .icon,
+.watchList.selected .icon {
+  color: white;
 }

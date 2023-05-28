@@ -1,5 +1,7 @@
 const MovieService = require("../services/movie.service");
 const movieService = new MovieService();
+const UserService = require("../services/user.service");
+const userService = new UserService();
 
 async function searchMovie(req, res, next) {
   try {
@@ -24,4 +26,47 @@ async function getMovieDetail(req, res, next) {
   }
 }
 
-module.exports = { getMovieDetail, searchMovie };
+async function addToWatchHistory(req, res, next) {
+  try {
+    await userService.findOneAndUpdate(
+      { username: req.session.currentUser.username },
+      { $addToSet: { watched: req.params.id } }
+    );
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(500);
+  }
+}
+
+async function removeFromWatchHistory(req, res, next) {
+  try {
+    return res.sendStatus(200);
+  } catch (err) {
+    return res.sendStatus(500);
+  }
+}
+
+async function addToWatchList(req, res, next) {
+  try {
+    return res.sendStatus(200);
+  } catch (err) {
+    return res.sendStatus(500);
+  }
+}
+
+async function removeFromWatchList(req, res, next) {
+  try {
+    return res.sendStatus(200);
+  } catch (err) {
+    return res.sendStatus(500);
+  }
+}
+module.exports = {
+  getMovieDetail,
+  searchMovie,
+  addToWatchHistory,
+  removeFromWatchHistory,
+  addToWatchList,
+  removeFromWatchList,
+};

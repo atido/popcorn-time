@@ -17,7 +17,7 @@ describe("MongooseService", () => {
   let Model;
 
   beforeAll(() => {
-    Model = mongoose.model("TestModel", new mongoose.Schema({ name: String }));
+    Model = mongoose.model("TestModel", new mongoose.Schema({ username: String, name: String }));
     service = new MongooseService(Model);
   });
 
@@ -70,6 +70,20 @@ describe("MongooseService", () => {
     it("should update a document in the database by id", async () => {
       const doc = await Model.create({ name: "Test" });
       const result = await service.update(doc._id, { name: "Updated" });
+      expect(result).toBeDefined();
+      expect(result.name).toEqual("Updated");
+      const updatedDoc = await Model.findById(doc._id);
+      expect(updatedDoc.name).toEqual("Updated");
+    });
+  });
+
+  describe("findOneAndUpdate", () => {
+    it("should update a document in the database by query", async () => {
+      const doc = await Model.create({ username: "testUsername", name: "test" });
+      const result = await service.findOneAndUpdate(
+        { username: doc.username },
+        { name: "Updated" }
+      );
       expect(result).toBeDefined();
       expect(result.name).toEqual("Updated");
       const updatedDoc = await Model.findById(doc._id);

@@ -15,6 +15,10 @@ class MongooseService {
     return this.model.findOne(query).exec();
   }
 
+  findOneAndUpdate(query, body, options = { new: true }) {
+    return this.model.findOneAndUpdate(query, body, options).exec();
+  }
+
   findById(id) {
     return this.model.findById(id).exec();
   }
