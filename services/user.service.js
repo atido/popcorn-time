@@ -26,6 +26,7 @@ class UserService {
     try {
       return await this.mongooseService.findOneAndUpdate(query, body);
     } catch (err) {
+      console.log(err);
       throw new Error("Error when finding user", err);
     }
   }

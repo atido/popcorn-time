@@ -1,23 +1,28 @@
 const watchElements = document.querySelectorAll(".watch");
-const addWatchListElements = document.querySelectorAll(".addWatchList");
+const watchListElements = document.querySelectorAll(".watchList");
 
 watchElements.forEach((watchElement) =>
   watchElement.addEventListener("click", async (event) => {
-    const clickedElement = event.currentTarget;
-    const movieId = clickedElement.getAttribute("data-id");
+    const movieId = event.currentTarget.getAttribute("data-id");
     const response = await fetch(`/movie/${movieId}/watch`, {
       method: "POST",
     });
     if (response.ok) {
-      clickedElement.classList.toggle("selected");
+      const watchElementsById = document.querySelectorAll(`.watch[data-id='${movieId}']`);
+      watchElementsById.forEach((element) => element.classList.toggle("selected"));
     }
   })
 );
 
-addWatchListElements.forEach((addWatchListElement) =>
+watchListElements.forEach((addWatchListElement) =>
   addWatchListElement.addEventListener("click", async (event) => {
+    const movieId = event.currentTarget.getAttribute("data-id");
     const response = await fetch(`/movie/${movieId}/addWatchList`, {
       method: "POST",
     });
+    if (response.ok) {
+      const watchListElementsById = document.querySelectorAll(`.watchList[data-id='${movieId}']`);
+      watchListElementsById.forEach((element) => element.classList.toggle("selected"));
+    }
   })
 );

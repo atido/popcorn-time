@@ -4,7 +4,7 @@
   </a>
   <div class="movie__actions">
     <div class="icon__withtooltip">
-      <a class="action watch" data-id="{{id}}"><svg
+      <a class="action watch {{#if watched}}selected{{/if}}" data-id="{{id}}"><svg
           class="icon icon--purple"
           xmlns="http://www.w3.org/2000/svg"
           width="512"
@@ -19,7 +19,7 @@
       <span class="tooltiptext">Add to watch history</span>
     </div>
     <div class="icon__withtooltip">
-      <a class="action watchList"><svg
+      <a class="action watchList {{#if watchList}}selected{{/if}}" data-id="{{id}}"><svg
           class="icon icon--blue"
           xmlns="http://www.w3.org/2000/svg"
           width="20"

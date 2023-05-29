@@ -28,10 +28,20 @@ async function getMovieDetail(req, res, next) {
 
 async function addToWatchHistory(req, res, next) {
   try {
-    await userService.findOneAndUpdate(
-      { username: req.session.currentUser.username },
-      { $addToSet: { watched: req.params.id } }
-    );
+    const movieId = req.params.id;
+    await userService.findOneAndUpdate({ username: req.session.currentUser.username }, [
+      {
+        $set: {
+          watched: {
+            $cond: [
+              { $in: [movieId, "$watched"] },
+              { $setDifference: ["$watched", [movieId]] },
+              { $concatArrays: ["$watched", [movieId]] },
+            ],
+          },
+        },
+      },
+    ]);
     res.sendStatus(200);
   } catch (err) {
     console.log(err);
@@ -39,25 +49,23 @@ async function addToWatchHistory(req, res, next) {
   }
 }
 
-async function removeFromWatchHistory(req, res, next) {
-  try {
-    return res.sendStatus(200);
-  } catch (err) {
-    return res.sendStatus(500);
-  }
-}
-
 async function addToWatchList(req, res, next) {
   try {
-    return res.sendStatus(200);
-  } catch (err) {
-    return res.sendStatus(500);
-  }
-}
-
-async function removeFromWatchList(req, res, next) {
-  try {
-    return res.sendStatus(200);
+    const movieId = req.params.id;
+    await userService.findOneAndUpdate({ username: req.session.currentUser.username }, [
+      {
+        $set: {
+          watchList: {
+            $cond: [
+              { $in: [movieId, "$watchList"] },
+              { $setDifference: ["$watchList", [movieId]] },
+              { $concatArrays: ["$watchList", [movieId]] },
+            ],
+          },
+        },
+      },
+    ]);
+    res.sendStatus(200);
   } catch (err) {
     return res.sendStatus(500);
   }
@@ -66,7 +74,5 @@ module.exports = {
   getMovieDetail,
   searchMovie,
   addToWatchHistory,
-  removeFromWatchHistory,
   addToWatchList,
-  removeFromWatchList,
 };

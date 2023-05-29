@@ -25,6 +25,9 @@ const userSchema = new Schema(
     watched: {
       type: [String],
     },
+    watchList: {
+      type: [String],
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
