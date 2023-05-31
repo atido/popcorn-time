@@ -5,5 +5,20 @@
             <h1 class="hero__title">Welcome, {{user.username}}</h1>
         </div>
     </section>
+    {{#if watchListMovies}}
+    <section id="watchlist-movies">
+        <h2>Your Watchlist</h2>
+        {{>movieswiper.partial watchListMovies}}
+    </section>
+    {{/if}}
     {{>featuredmovies.partial featuredMovies}}
 </div>
+
+{{#extend "css"}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+{{/extend}}
+{{#extend "scripts"}}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="/js/swiper.js"></script>
+  <script src="/js/movie.js"></script>
+{{/extend}}

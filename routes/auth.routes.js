@@ -30,7 +30,24 @@ router.get("/verify", isLoggedIn, (req, res, next) => {
 });
 
 // GET  /auth/reset  -  reset password form
-router.get("/reset", isLoggedOut, (req, res, next) => ResetController.getResetForm(req, res, next));
+router.get("/requestReset", isLoggedOut, (req, res, next) =>
+  ResetController.getRequestResetForm(req, res, next)
+);
+
+// POST  /auth/reset  -  reset password form
+router.post("/requestReset", isLoggedOut, (req, res, next) =>
+  ResetController.requestPasswordReset(req, res, next)
+);
+
+// GET  /auth/reset  -  reset password form
+router.get("/resetPassword", isLoggedOut, (req, res, next) =>
+  ResetController.getNewPasswordForm(req, res, next)
+);
+
+// POST  /auth/reset  -  reset password form
+router.post("/resetPassword", isLoggedOut, (req, res, next) =>
+  ResetController.resetPassword(req, res, next)
+);
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {

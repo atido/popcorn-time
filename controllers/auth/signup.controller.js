@@ -20,8 +20,14 @@ async function createSignup(req, res, next) {
         message: "User already exists",
       });
     }
-    await userService.create({ email, password, username });
-    return res.render("dashboard");
+    const user = await userService.create({ email, password, username });
+    req.session.currentUser = {
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      avatar: user.avatar,
+    };
+    return res.redirect("/dashboard");
   } catch (err) {
     next(err);
   }

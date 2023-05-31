@@ -8,6 +8,8 @@
   --swiper-theme-color: #fff;
   --label-color: #959595;
   --actions-color: #1d1d1d;
+  --blue-color: #2b678f;
+  --purple-color: #8e44ad;
 }
 *:not(dialog) {
   box-sizing: border-box;
@@ -49,19 +51,16 @@ a {
   text-decoration: none;
   color: var(--primary-color);
 }
-a:hover {
-  text-decoration: underline;
-}
 .icon {
   width: 20px;
   height: 20px;
   color: var(--primary-color);
 }
 .icon--purple {
-  color: #8e44ad;
+  color: var(--purple-color);
 }
 .icon--blue {
-  color: #2b678f;
+  color: var(--blue-color);
 }
 img {
   display: block;
@@ -91,6 +90,24 @@ img {
 }
 .btn--secondary:hover {
   background-color: var(--secondary-color-hover);
+}
+.btn--purple {
+  background-color: transparent;
+  border: 1px solid var(--purple-color);
+  color: var(--purple-color);
+}
+.btn--purple:hover {
+  background-color: var(--purple-color);
+  color: white;
+}
+.btn--blue {
+  background-color: transparent;
+  border: 1px solid var(--blue-color);
+  color: var(--blue-color);
+}
+.btn--blue:hover {
+  background-color: var(--blue-color);
+  color: white;
 }
 .error {
   background-color: var(--error-color-bg);
@@ -242,6 +259,9 @@ img {
   color: white;
   font-size: 0.8rem;
 }
+.header__signin:hover {
+  text-decoration: underline;
+}
 .header__avatar {
   height: 30px;
 }
@@ -314,10 +334,11 @@ img {
 #dashboard .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../images/dashboard-background.jpg");
+  height: 40vh;
 }
 #dashboard .hero__content {
   backdrop-filter: blur(4px);
-  height: 60vh;
+  height: 40vh;
   width: auto;
   flex-direction: row;
 }
@@ -475,6 +496,15 @@ img {
   display: flex;
   align-items: center;
 }
+.movie__action-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.movie__action-btn:hover .icon {
+  color: white;
+}
 .movie__actors .swiper {
   text-align: center;
 }
@@ -490,11 +520,13 @@ img {
 }
 .watch:hover,
 .watch.selected {
-  background-color: #8e44ad;
+  background-color: var(--purple-color);
+  color: white;
 }
 .watchList:hover,
 .watchList.selected {
-  background-color: #2b678f;
+  background-color: var(--blue-color);
+  color: white;
 }
 
 .watch:hover .icon,

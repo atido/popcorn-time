@@ -5,7 +5,7 @@
     {{#if message}}
       <div class="error">{{message}}</div>
     {{/if}}
-    <form class="sign__form" action="/auth/signup" method="POST">
+    <form class="sign__form" action="/auth/requestReset" method="POST">
       <div class="input__container">
         <svg
           class="icon input__icon"
@@ -19,7 +19,6 @@
           /></svg>
         <input class="input__field" type="email" name="email" placeholder="email" />
       </div>
-
       <button class="sign__submit btn btn--primary" type="submit">SEND INSTRUCTIONS</button>
     </form>
   </div>

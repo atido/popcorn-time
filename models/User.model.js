@@ -21,6 +21,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
+      default: "/images/avatar.png",
     },
     watched: {
       type: [String],

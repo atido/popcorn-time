@@ -6,33 +6,22 @@ const movieService = new MovieService();
 async function getDashboardPage(req, res, next) {
   try {
     const featuredMovies = {};
-    featuredMovies.popularMovies = await movieService.getPopularMovies();
-    featuredMovies.trendingMovies = await movieService.getTrendingMovies();
     const user = await userService.findOne({ username: req.session.currentUser.username });
+    featuredMovies.popularMovies = await movieService.getPopularMovies();
+    movieService.checkedActionIndicatorsMovies(user, featuredMovies.popularMovies);
 
-    featuredMovies.popularMovies.forEach((movie) => {
-      if (user.watched.includes(movie.id)) {
-        movie.watched = true;
-      }
-      if (user.watchList.includes(movie.id)) {
-        movie.watchList = true;
-      }
-    });
-    featuredMovies.trendingMovies.forEach((movie) => {
-      if (user.watched.includes(movie.id)) {
-        movie.watched = true;
-      }
-      if (user.watchList.includes(movie.id)) {
-        movie.watchList = true;
-      }
-    });
+    featuredMovies.trendingMovies = await movieService.getTrendingMovies();
+    movieService.checkedActionIndicatorsMovies(user, featuredMovies.trendingMovies);
+
+    const watchListMovies = await movieService.getMovies(user.watchList);
+    movieService.checkedActionIndicatorsMovies(user, watchListMovies);
 
     return res.render("dashboard", {
       featuredMovies,
+      watchListMovies,
     });
   } catch (err) {
     next(err);
   }
 }
-
 module.exports = { getDashboardPage };

@@ -48,6 +48,19 @@ class MovieService {
       throw new Error("Error when getting movie", err);
     }
   }
+  async getMovies(idsArr) {
+    try {
+      const promises = [];
+      idsArr.forEach((id) => {
+        promises.push(this.moviedb.movieInfo({ id }));
+      });
+      const moviesFromApi = await Promise.all(promises);
+      return moviesFromApi.map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
+    } catch (err) {
+      console.log(err);
+      throw new Error("Error when getting movies", err);
+    }
+  }
   async getMovieWatchProviders(id) {
     try {
       const movieWatchProvidersResult = await this.moviedb.movieWatchProviders({ id });
@@ -77,6 +90,16 @@ class MovieService {
     } catch (err) {
       throw new Error("Error when getting actors", err);
     }
+  }
+  checkedActionIndicatorsMovies(user, moviesList) {
+    moviesList.forEach((movie) => {
+      if (user.watched.includes(movie.id)) {
+        movie.watched = true;
+      }
+      if (user.watchList.includes(movie.id)) {
+        movie.watchList = true;
+      }
+    });
   }
 }
 module.exports = MovieService;

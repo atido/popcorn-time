@@ -5,10 +5,10 @@ const userService = new UserService();
 
 async function searchMovie(req, res, next) {
   try {
-    const moviesResults = await movieService.searchMovie(req.query.query);
+    const movies = await movieService.searchMovie(req.query.query);
     return res.render("movie/movieList", {
-      search: { query: req.query.query, resultsLength: moviesResults.length },
-      movies: moviesResults,
+      search: { query: req.query.query, resultsLength: movies.length },
+      movies,
     });
   } catch (err) {
     next(err);
@@ -20,6 +20,10 @@ async function getMovieDetail(req, res, next) {
     const movie = await movieService.getMovieDetail(req.params.id);
     movie.actors = await movieService.getMovieActors(req.params.id);
     movie.watchProviders = await movieService.getMovieWatchProviders(req.params.id);
+    if (req.session.currentUser) {
+      user = await userService.findOne({ username: req.session.currentUser.username });
+      movieService.checkedActionIndicatorsMovies(user, [movie]);
+    }
     return res.render("movie/movieDetail", { movie, headerPosition: "fixed" });
   } catch (err) {
     next(err);

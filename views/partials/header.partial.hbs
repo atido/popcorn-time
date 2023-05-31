@@ -15,7 +15,7 @@
           /></svg>
         <input
           class="header__search input__field"
-          type="search"
+          type="text"
           name="query"
           placeholder="search..."
         />
@@ -24,7 +24,11 @@
   </div>
   <div class="header__user-nav">
     {{#if user}}
-      <img class="header__avatar avatar" src="{{user.avatar}}" alt="avatar" />
+      <a href="/dashboard"><img
+          class="header__avatar avatar"
+          src="{{user.avatar}}"
+          alt="avatar"
+        /></a>
     {{else}}
       <a class="header__signin" href="/auth/login">SIGN IN</a>
     {{/if}}

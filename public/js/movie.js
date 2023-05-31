@@ -4,25 +4,45 @@ const watchListElements = document.querySelectorAll(".watchList");
 watchElements.forEach((watchElement) =>
   watchElement.addEventListener("click", async (event) => {
     const movieId = event.currentTarget.getAttribute("data-id");
-    const response = await fetch(`/movie/${movieId}/watch`, {
+    fetch(`/movie/${movieId}/watch`, {
       method: "POST",
-    });
-    if (response.ok) {
-      const watchElementsById = document.querySelectorAll(`.watch[data-id='${movieId}']`);
-      watchElementsById.forEach((element) => element.classList.toggle("selected"));
-    }
+    })
+      .then((response) => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        } else {
+          if (response.ok) {
+            const watchElementsById = document.querySelectorAll(`.watch[data-id='${movieId}']`);
+            watchElementsById.forEach((element) => element.classList.toggle("selected"));
+          }
+        }
+      })
+      .catch(function (err) {
+        console.info(err);
+      });
   })
 );
 
 watchListElements.forEach((addWatchListElement) =>
   addWatchListElement.addEventListener("click", async (event) => {
     const movieId = event.currentTarget.getAttribute("data-id");
-    const response = await fetch(`/movie/${movieId}/addWatchList`, {
+    fetch(`/movie/${movieId}/addWatchList`, {
       method: "POST",
-    });
-    if (response.ok) {
-      const watchListElementsById = document.querySelectorAll(`.watchList[data-id='${movieId}']`);
-      watchListElementsById.forEach((element) => element.classList.toggle("selected"));
-    }
+    })
+      .then((response) => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        } else {
+          if (response.ok) {
+            const watchListElementsById = document.querySelectorAll(
+              `.watchList[data-id='${movieId}']`
+            );
+            watchListElementsById.forEach((element) => element.classList.toggle("selected"));
+          }
+        }
+      })
+      .catch(function (err) {
+        console.info(err);
+      });
   })
 );

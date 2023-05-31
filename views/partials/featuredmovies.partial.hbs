@@ -1,33 +1,8 @@
 <section id="popular-movies">
   <h2>Popular Movies</h2>
-  <div class="swiper-container swiper">
-    <div class="swiper-wrapper">
-      {{#each this.popularMovies}}
-        {{>moviecard.partial this}}
-      {{/each}}
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
+      {{>movieswiper.partial this.popularMovies}}
 </section>
-<section id="trending-movies" class="grid-cards">
+<section id="trending-movies">
   <h2>Trending Movies</h2>
-  <div class="swiper-container swiper">
-    <div class="swiper-wrapper">
-      {{#each this.trendingMovies}}
-        {{>moviecard.partial this}}
-      {{/each}}
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
+  {{>movieswiper.partial this.trendingMovies}}
 </section>
-
-{{#extend "css"}}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-{{/extend}}
-{{#extend "scripts"}}
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="/js/swiper.js"></script>
-  <script src="/js/movie.js"></script>
-{{/extend}}
