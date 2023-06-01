@@ -11,8 +11,12 @@ class MongooseService {
     return this.model.findByIdAndDelete(id).exec();
   }
 
-  findOne(query) {
-    return this.model.findOne(query).exec();
+  findOne(query, projection) {
+    return this.model.findOne(query, projection).exec();
+  }
+
+  count(query) {
+    return this.model.count(query).exec();
   }
 
   findOneAndUpdate(query, body, options = { new: true }) {

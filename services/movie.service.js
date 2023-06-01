@@ -99,6 +99,9 @@ class MovieService {
       if (user.watchList.includes(movie.id)) {
         movie.watchList = true;
       }
+      user.rates
+        .filter((rate) => rate.movieId == movie.id)
+        .map((rate) => (movie.userRate = rate.rate));
     });
   }
 }

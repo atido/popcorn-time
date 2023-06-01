@@ -7,7 +7,7 @@ class MovieMapper {
       title,
       backdrop_img: `${process.env.TMDB_API_IMG_URL}w1280${backdrop_path}`,
       release_date,
-      vote_average,
+      vote_average: Math.round(vote_average * 10) / 10,
     };
   }
   static toMovieDetailDTO(movieDetailFromApi) {
@@ -33,7 +33,7 @@ class MovieMapper {
         month: "long",
         day: "numeric",
       }),
-      vote_average,
+      vote_average: Math.round(vote_average * 10) / 10,
       genres: genres.map((genre) => genre.name),
       runtime: toHoursAndMinutes(runtime),
     };
@@ -47,7 +47,9 @@ class MovieMapper {
   }
   static toMovieActorsDTO(movieActorsFromApi) {
     const { name, character, profile_path } = movieActorsFromApi;
-    const profile_img = profile_path ? `${process.env.TMDB_API_IMG_URL}w154${profile_path}` : "";
+    const profile_img = profile_path
+      ? `${process.env.TMDB_API_IMG_URL}w154${profile_path}`
+      : "/images/default-actor.png";
     return {
       name,
       character,

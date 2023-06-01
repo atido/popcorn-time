@@ -10,6 +10,7 @@
   --actions-color: #1d1d1d;
   --blue-color: #2b678f;
   --purple-color: #8e44ad;
+  --red-color: #9e2424;
 }
 *:not(dialog) {
   box-sizing: border-box;
@@ -54,6 +55,7 @@ a {
 .icon {
   width: 20px;
   height: 20px;
+  font-size: 20px;
   color: var(--primary-color);
 }
 .icon--purple {
@@ -61,6 +63,9 @@ a {
 }
 .icon--blue {
   color: var(--blue-color);
+}
+.icon--red {
+  color: var(--red-color);
 }
 img {
   display: block;
@@ -76,6 +81,7 @@ img {
 }
 .btn--full-width {
   width: 100%;
+  background-color: transparent;
 }
 .btn--primary {
   background-color: var(--primary-color);
@@ -92,7 +98,6 @@ img {
   background-color: var(--secondary-color-hover);
 }
 .btn--purple {
-  background-color: transparent;
   border: 1px solid var(--purple-color);
   color: var(--purple-color);
 }
@@ -101,12 +106,19 @@ img {
   color: white;
 }
 .btn--blue {
-  background-color: transparent;
   border: 1px solid var(--blue-color);
   color: var(--blue-color);
 }
 .btn--blue:hover {
   background-color: var(--blue-color);
+  color: white;
+}
+.btn--red {
+  border: 1px solid var(--red-color);
+  color: var(--red-color);
+}
+.btn--red:hover {
+  background-color: var(--red-color);
   color: white;
 }
 .error {
@@ -125,7 +137,10 @@ img {
 }
 .icon__withtooltip {
   position: relative;
+  display: flex;
+  align-items: center;
 }
+
 .icon__withtooltip .tooltiptext {
   position: absolute;
   z-index: 1;
@@ -508,6 +523,9 @@ img {
 .movie__actors .swiper {
   text-align: center;
 }
+.movie__rating {
+  color: white;
+}
 .actor__name {
   color: var(--label-color);
 }
@@ -517,6 +535,9 @@ img {
   height: 2rem;
   align-items: center;
   justify-content: center;
+}
+.action:hover {
+  cursor: pointer;
 }
 .watch:hover,
 .watch.selected {
@@ -528,10 +549,36 @@ img {
   background-color: var(--blue-color);
   color: white;
 }
-
+.rate:hover,
+.rate.selected {
+  background-color: var(--red-color);
+  color: white;
+}
 .watch:hover .icon,
 .watchList:hover .icon,
 .watch.selected .icon,
-.watchList.selected .icon {
+.watchList.selected .icon,
+.rate.selected .icon,
+.rate.selected .icon {
   color: white;
+}
+/*
+██████   █████  ████████ ██ ███    ██  ██████  
+██   ██ ██   ██    ██    ██ ████   ██ ██       
+██████  ███████    ██    ██ ██ ██  ██ ██   ███ 
+██   ██ ██   ██    ██    ██ ██  ██ ██ ██    ██ 
+██   ██ ██   ██    ██    ██ ██   ████  ██████  */
+
+.rating {
+  width: 17rem;
+  display: flex;
+  gap: 0.3em;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 2px #b3acac;
+}
+
+.rating__heart {
+  cursor: pointer;
 }

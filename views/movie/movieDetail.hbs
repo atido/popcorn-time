@@ -36,6 +36,10 @@
                   {{this}}
               {{/each}}
           </li>
+          <li><span>Rate Average</span><svg class="icon icon--red" xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" 
+          d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg
+          >{{movie.vote_average}}</li>
       </ul>
       <div class="movie__overview">
           <h3>Overview</h3>
@@ -43,27 +47,11 @@
       </div>
     </div>
     <div class="movie__actions-detail">
-      <a class="movie__action-btn btn btn--purple watch {{#if movie.watched}}selected{{/if}}" data-id="{{movie.id}}"><svg
-          class="icon icon--purple"
-          xmlns="http://www.w3.org/2000/svg"
-          width="512"
-          height="512"
-          viewBox="0 0 512 512"
-        ><path
-            fill="currentColor"
-            d="m173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69L432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-          />
-        </svg>{{#if movie.watched}}Watched{{else}}Add to watch history{{/if}}</a>
-      <a class="movie__action-btn btn btn--blue watchList {{#if movie.watchList}}selected{{/if}}" data-id="{{movie.id}}"><svg
-          class="icon icon--blue"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-        ><path
-            fill="currentColor"
-            d="M1 3h16v2H1Zm0 6h6v2H1Zm0 6h8v2H1Zm8-4.24h3.85L14.5 7l1.65 3.76H20l-3 3.17l.9 4.05l-3.4-2.14L11.1 18l.9-4.05Z"
-          /></svg>{{#if movie.watchList}}In your watchlist{{else}}Add to watchlist{{/if}}</a>
+      {{>buttons/buttonwatch movie}}
+      {{>buttons/buttonwatchlist movie}}
+      {{>buttons/buttonrate movie}}
+      <button id="openRateModal">Rate now</button>
+      {{>ratenowdialog.partial}}
     </div>
     <div class="movie__actors">
         <h3>Actors</h3>
@@ -85,7 +73,9 @@
 {{/extend}}
 {{#extend "scripts"}}
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
   <script src="/js/swiper.js"></script>
-  <script src="/js/dialog.js"></script>
+  <script src="/js/watchnow.js"></script>
+  <script src="/js/rating.js"></script>
   <script src="/js/movie.js"></script>
 {{/extend}}

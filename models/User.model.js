@@ -29,6 +29,9 @@ const userSchema = new Schema(
     watchList: {
       type: [String],
     },
+    rates: {
+      type: [{ movieId: String, rate: Number }],
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

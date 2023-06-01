@@ -14,11 +14,19 @@ class UserService {
     }
   }
 
-  async findOne(query) {
+  async findOne(query, projection) {
     try {
-      return await this.mongooseService.findOne(query);
+      return await this.mongooseService.findOne(query, projection);
     } catch (err) {
       throw new Error("Error when finding user", err);
+    }
+  }
+
+  async count(query) {
+    try {
+      return await this.mongooseService.count(query);
+    } catch (err) {
+      throw new Error("Error when counting", err);
     }
   }
 

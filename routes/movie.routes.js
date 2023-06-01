@@ -11,16 +11,10 @@ router.post("/:id/watch", isLoggedIn, (req, res, next) =>
   MovieController.addToWatchHistory(req, res, next)
 );
 
-router.post("/:id/remove", isLoggedIn, (req, res, next) =>
-  MovieController.removeFromWatchHistory(req, res, next)
-);
-
-router.post("/:id/addWatchList", isLoggedIn, (req, res, next) =>
+router.post("/:id/watchList", isLoggedIn, (req, res, next) =>
   MovieController.addToWatchList(req, res, next)
 );
 
-router.post("/:id/removeWatchList", isLoggedIn, (req, res, next) =>
-  MovieController.removeFromWatchList(req, res, next)
-);
+router.post("/:id/rate", isLoggedIn, (req, res, next) => MovieController.rateMovie(req, res, next));
 
 module.exports = router;
