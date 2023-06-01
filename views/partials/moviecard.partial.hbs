@@ -1,4 +1,9 @@
 <div class="swiper-slide">
+  {{#if userRate}}
+  <div class="movie__corner-rating">
+    <div class="movie__corner-rating-text">{{userRate}}</div>
+  </div>
+  {{/if}}
   <a href="/movie/{{id}}/detail"><img src="{{backdrop_img}}" alt="{{title}}" loading="lazy"  />
     <h4 class="swiper-title">{{title}}</h4>
   </a>

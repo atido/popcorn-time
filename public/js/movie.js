@@ -16,15 +16,7 @@ function initWatchListElementsListener() {
     watchListElement.addEventListener("click", addWatchListElementEventListener)
   );
 }
-function initRateElementsListener() {
-  const rateElements = document.querySelectorAll(".rate");
-  rateElements.forEach((rateElement) =>
-    rateElement.removeEventListener("click", addRateElementEventListener)
-  );
-  rateElements.forEach((rateElement) =>
-    rateElement.addEventListener("click", addRateElementEventListener)
-  );
-}
+
 async function addWatchElementEventListener(event) {
   const movieId = event.currentTarget.getAttribute("data-id");
   const isBtn = event.currentTarget.classList.contains("btn");
@@ -96,41 +88,5 @@ async function addWatchListElementEventListener(event) {
       console.log(err);
     });
 }
-function addRateElementEventListener(event) {
-  const movieId = event.currentTarget.getAttribute("data-id");
-  const isBtn = event.currentTarget.classList.contains("btn");
-  fetch(`/movie/${movieId}/rate`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ rate: 5, isBtn }),
-  })
-    .then((response) => {
-      if (response.redirected) {
-        window.location.href = response.url;
-      } else {
-        if (response.ok) {
-          response
-            .text()
-            .then((html) => {
-              const elementsById = document.querySelectorAll(`.rate[data-id='${movieId}']`);
-              elementsById.forEach((element) => {
-                element.outerHTML = html;
-              });
-              initRateElementsListener();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
 initWatchElementsListener();
 initWatchListElementsListener();
-initRateElementsListener();

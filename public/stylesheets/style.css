@@ -562,6 +562,31 @@ img {
 .rate.selected .icon {
   color: white;
 }
+.movie__corner-rating {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  border-color: transparent var(--red-color) transparent transparent;
+}
+.movie__corner-rating-text {
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: -22px;
+  width: 15px;
+  height: 30px;
+  text-align: center;
+  line-height: 12px;
+  transform: rotate(45deg);
+  z-index: 15;
+}
+.
 /*
 ██████   █████  ████████ ██ ███    ██  ██████  
 ██   ██ ██   ██    ██    ██ ████   ██ ██       
@@ -572,6 +597,7 @@ img {
 .rating {
   width: 17rem;
   display: flex;
+  justify-content: center;
   gap: 0.3em;
   padding: 5px;
   overflow: hidden;
@@ -581,4 +607,13 @@ img {
 
 .rating__heart {
   cursor: pointer;
+}
+.rating button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
