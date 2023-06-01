@@ -34,6 +34,14 @@ async function addToWatchHistory(req, res, next) {
   try {
     const movieId = req.params.id;
     const { isBtn } = req.body;
+    console.log(
+      "movieId:",
+      movieId,
+      "-isBtn:",
+      isBtn,
+      "-username:",
+      req.session.currentUser.username
+    );
     await userService.findOneAndUpdate({ username: req.session.currentUser.username }, [
       {
         $set: {
