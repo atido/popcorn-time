@@ -123,7 +123,7 @@ async function rateMovie(req, res, next) {
           { rates: { $elemMatch: { movieId: movieId } } },
         ],
       },
-      { "rates.$": 1 }
+      { "rates.$": 1, _id: 0 }
     );
     res.render(isBtn ? "partials/buttons/buttonrate" : "partials/buttons/iconrate", {
       layout: false,

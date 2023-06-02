@@ -8,4 +8,8 @@ router.get("/", isLoggedIn, (req, res, next) =>
   DashboardController.getDashboardPage(req, res, next)
 );
 
+router.get("/refreshRecommandations", isLoggedIn, (req, res, next) =>
+  DashboardController.refreshUserMoviesRecommandations(req, res, next)
+);
+
 module.exports = router;

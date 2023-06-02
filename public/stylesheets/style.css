@@ -79,10 +79,6 @@ img {
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
   cursor: pointer;
 }
-.btn--full-width {
-  width: 100%;
-  background-color: transparent;
-}
 .btn--primary {
   background-color: var(--primary-color);
   color: white;
@@ -323,7 +319,7 @@ img {
   width: 25rem;
   margin: auto;
   text-align: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .hero__logo {
   height: 6rem;
@@ -341,25 +337,62 @@ img {
 .hero.movie-detail .hero__title {
   margin-left: 4rem;
 }
+
 @media screen and (min-width: 768px) {
   .hero.movie-detail .hero__title {
     margin-left: 11rem;
   }
 }
-#dashboard .hero {
+.hero.welcome,
+.hero.welcome .hero__content {
+  height: 60vh;
+}
+
+@media screen and (min-width: 768px) {
+  .hero.welcome,
+  .hero.welcome .hero__content {
+    height: 50vh;
+  }
+}
+
+.hero.welcome {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../images/dashboard-background.jpg");
-  height: 40vh;
 }
-#dashboard .hero__content {
+.hero.welcome .hero__content,
+.hero.recommandations .hero__content {
   backdrop-filter: blur(4px);
-  height: 40vh;
   width: auto;
-  flex-direction: row;
 }
-#dashboard .hero__logo {
+.hero.welcome .hero__logo {
   width: 4rem;
   height: auto;
+}
+.welcome__content,
+.recommandations__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.recommandations__content {
+  flex-direction: column;
+  gap: 1rem;
+}
+.recommandations__movies {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.recommandations__movies .movie__poster {
+  margin: 0;
+  max-height: 100%;
+}
+.hero__title span {
+  color: gold;
+}
+.hero__title.underline {
+  text-decoration: underline solid 3px gold;
 }
 
 /*

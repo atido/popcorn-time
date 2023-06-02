@@ -1,11 +1,12 @@
 const { toHoursAndMinutes } = require("../utils/time");
 class MovieMapper {
   static toMovieDTO(movieFromApi) {
-    const { id, title, backdrop_path, release_date, vote_average } = movieFromApi;
+    const { id, title, backdrop_path, poster_path, release_date, vote_average } = movieFromApi;
     return {
       id,
       title,
-      backdrop_img: `${process.env.TMDB_API_IMG_URL}w1280${backdrop_path}`,
+      backdrop_img: `${process.env.TMDB_API_IMG_URL}w780${backdrop_path}`,
+      poster_img: `${process.env.TMDB_API_IMG_URL}w154${poster_path}`,
       release_date,
       vote_average: Math.round(vote_average * 10) / 10,
     };

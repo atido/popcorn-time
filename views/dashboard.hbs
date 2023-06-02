@@ -1,8 +1,23 @@
 <div id="dashboard">
-    <section class="hero">
+    <section class="hero welcome">
         <div class="hero__content">
-            <img class="hero__logo avatar" src="{{user.avatar}}" alt="avatar">
-            <h1 class="hero__title">Welcome, {{user.username}}</h1>
+            <div class="welcome__content">
+                <img class="hero__logo avatar" src="{{user.avatar}}" alt="avatar">
+                <h1 class="hero__title">Welcome, {{user.username}}</h1>
+            </div>
+            <div class="recommandations__content">
+                <h4 class="hero__title">Looking for a <span>great movie</span> based on your <span>preferred movies</span> ?</h4>
+                {{#if userMoviesRecommandations}}
+                <h3 class="hero__title underline">Our recommandations</h3>
+                <div class="recommandations__movies">
+                    {{>recommandations/recommandationsmovies userMoviesRecommandations}}
+                </div>
+                <a class="btn btn--primary">Refresh recommandations</a>
+                {{else}}
+                <h4 class="hero__title">Rate a minimum of <span>3 movies</span> and enjoy our <span>magical recommandations !</span></h4>
+                {{/if}}
+
+            </div>
         </div>
     </section>
     {{#if watchListMovies}}

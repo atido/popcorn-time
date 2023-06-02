@@ -1,9 +1,11 @@
 const MongooseService = require("./mongoose.service");
+const MovieService = require("./movie.service");
 const UserModel = require("../models/User.model");
 
 class UserService {
   constructor() {
     this.mongooseService = new MongooseService(UserModel);
+    this.movieService = new MovieService();
   }
 
   async create(userToCreate) {
@@ -95,6 +97,28 @@ class UserService {
       return { success: false, message: "Provide email and password." };
     }
     return { success: true };
+  }
+
+  async getUserPreferredMovies(username, length) {
+    try {
+      const userRates = await this.mongooseService.findOne({ username }, { rates: 1, _id: 0 });
+      const preferedMovies = userRates.rates
+        .sort((a, b) => b.rate - a.rate)
+        .slice(0, length)
+        .map((rate) => rate.movieId);
+      return preferedMovies;
+    } catch (err) {
+      throw new Error("Error when getting preferred movies", err);
+    }
+  }
+  async getUserMoviesRecommandations(username) {
+    try {
+      const preferredMoviesIds = await this.getUserPreferredMovies(username, 3);
+      return await this.movieService.getRecommandationsFromMovies(preferredMoviesIds);
+    } catch (err) {
+      console.log(err);
+      throw new Error("Error when getting movies recommandations", err);
+    }
   }
 }
 

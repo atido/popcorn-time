@@ -23,7 +23,7 @@
         </div>
         <small>{{movie.watchProviders.resultsNumber}} services</small>
     </button>
-    {{>watchnowdialog.partial movie.watchProviders}}
+    {{>dialogs/watchnowdialog.partial movie.watchProviders}}
     {{/if}}
   </aside>
   <div class="movie__content">
@@ -50,7 +50,7 @@
       {{>buttons/buttonwatch movie}}
       {{>buttons/buttonwatchlist movie}}
       {{>buttons/buttonrate movie}}
-      {{>ratenowdialog.partial id=movie.id}}
+      {{>dialogs/ratenowdialog.partial id=movie.id}}
     </div>
     <div class="movie__actors">
         <h3>Actors</h3>

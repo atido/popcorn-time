@@ -13,6 +13,7 @@ class MovieService {
         .filter((movieFromApi) => movieFromApi.backdrop_path)
         .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
     } catch (err) {
+      console.log(err);
       throw new Error("Error when fetching popular movies", err);
     }
   }
@@ -27,12 +28,13 @@ class MovieService {
         .filter((movieFromApi) => movieFromApi.backdrop_path)
         .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
     } catch (err) {
+      console.log(err);
       throw new Error("Error when fetching trending movies", err);
     }
   }
   async searchMovie(query) {
     try {
-      const moviesResults = await this.moviedb.searchMovie({ query });
+      const moviesResults = await this.moviedb.searchMovie({ query, include_adult: false });
       return moviesResults.results
         .filter((movieFromApi) => movieFromApi.backdrop_path)
         .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
@@ -46,6 +48,22 @@ class MovieService {
       return MovieMapper.toMovieDetailDTO(movieResult);
     } catch (err) {
       throw new Error("Error when getting movie", err);
+    }
+  }
+  async getRecommandations(id) {
+    try {
+      const moviesResults = await this.moviedb.movieRecommendations({ id });
+      return moviesResults.results
+        .filter(
+          (movieFromApi) =>
+            movieFromApi.poster_path &&
+            !movieFromApi.adult &&
+            movieFromApi.vote_average > 5 &&
+            movieFromApi.vote_count > 200
+        )
+        .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
+    } catch (err) {
+      throw new Error("Error when getting recommandation", err);
     }
   }
   async getMovies(idsArr) {
@@ -103,6 +121,21 @@ class MovieService {
         .filter((rate) => rate.movieId == movie.id)
         .map((rate) => (movie.userRate = rate.rate));
     });
+  }
+  async getRecommandationsFromMovies(preferredMoviesIds) {
+    try {
+      const userMoviesRecommandations = [];
+      for (const preferredMovieId of preferredMoviesIds) {
+        const recommandations = await this.getRecommandations(preferredMovieId);
+        userMoviesRecommandations.push(
+          recommandations[Math.round(Math.random() * recommandations.length)]
+        );
+      }
+      return userMoviesRecommandations;
+    } catch (err) {
+      console.log(err);
+      throw new Error("Error when getting user recommandations", err);
+    }
   }
 }
 module.exports = MovieService;
