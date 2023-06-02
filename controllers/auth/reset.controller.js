@@ -84,10 +84,9 @@ async function resetPassword(req, res, next) {
     if (!result.success)
       return res.render("auth/new-password", { layout: "layouts/auth", message: result.message });
 
-    const user = await userService.findOneAndUpdate(
-      { email: emailFromSession },
-      { password: password1 }
-    );
+    const user = await userService.findOne({ email: emailFromSession });
+    user.password = password1;
+    user.save();
     const { _id, email, username, avatar = "/images/avatar.png" } = user;
     req.session.currentUser = { _id, email, username, avatar };
     return res.redirect("/dashboard");
