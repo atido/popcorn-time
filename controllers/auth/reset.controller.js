@@ -30,7 +30,7 @@ async function requestPasswordReset(req, res, next) {
     await tokenService.create({ userId: user.id, token: hash, createdAt: Date.now() });
     const link = `${process.env.CLIENT_URL}/auth/resetPassword?token=${resetToken}&id=${user._id}`;
 
-    await emailService.sendEmail(email, link);
+    await emailService.sendEmail(user.email, link);
 
     return res.render("auth/reset-request", {
       layout: "layouts/auth",
