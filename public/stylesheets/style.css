@@ -385,11 +385,15 @@ img {
   gap: 1rem;
   transition: opacity 0.5s ease-in-out;
 }
-#recommandations {
-}
 .recommandations__movies .movie__poster {
   margin: 0;
   max-height: 100%;
+}
+.recommandation-rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.2rem;
 }
 .hero__title span {
   color: gold;
