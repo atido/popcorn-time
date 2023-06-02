@@ -128,7 +128,7 @@ class MovieService {
       for (const preferredMovieId of preferredMoviesIds) {
         const recommandations = await this.getRecommandations(preferredMovieId);
         userMoviesRecommandations.push(
-          recommandations[Math.round(Math.random() * recommandations.length)]
+          recommandations[Math.floor(Math.random() * recommandations.length)]
         );
       }
       return userMoviesRecommandations;

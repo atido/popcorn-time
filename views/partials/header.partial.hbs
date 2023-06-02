@@ -1,5 +1,7 @@
 <header class="header container {{headerPosition}}">
-  <a href="/"><img src="/images/logo.png" alt="logo" class="logo" /></a>
+  <a href="{{#if user}}/dashboard{{else}}/{{/if}}">
+    <img src="/images/logo.png" alt="logo" class="logo" />
+  </a>
   <div class="header__searchbar">
     <form action="/movie/search">
       <div class="input__container"><svg

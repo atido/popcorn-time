@@ -319,7 +319,7 @@ img {
   width: 25rem;
   margin: auto;
   text-align: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 .hero__logo {
   height: 6rem;
@@ -383,6 +383,9 @@ img {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  transition: opacity 0.5s ease-in-out;
+}
+#recommandations {
 }
 .recommandations__movies .movie__poster {
   margin: 0;
@@ -427,7 +430,6 @@ img {
   left: 0.8rem;
   text-shadow: 0 0 20px #000;
 }
-
 .swiper-title:hover {
   text-decoration: underline;
 }
@@ -649,4 +651,21 @@ img {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+#loader {
+  width: 2rem;
+  height: 2rem;
+  border: 5px solid #f3f3f3;
+  border-top: 6px solid var(--primary-color);
+  border-radius: 100%;
+  margin: auto;
+  animation: spin 1s infinite linear;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

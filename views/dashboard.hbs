@@ -7,16 +7,15 @@
             </div>
             <div class="recommandations__content">
                 <h4 class="hero__title">Looking for a <span>great movie</span> based on your <span>preferred movies</span> ?</h4>
-                {{#if userMoviesRecommandations}}
+                {{#if recommandations}}
                 <h3 class="hero__title underline">Our recommandations</h3>
-                <div class="recommandations__movies">
-                    {{>recommandations/recommandationsmovies userMoviesRecommandations}}
-                </div>
-                <a class="btn btn--primary">Refresh recommandations</a>
+                <div id="recommandations"class="recommandations__movies">
+                    {{>recommandations/recommandationsmovies parameter=recommandations}}
+            </div>
+                <a id="refreshRecommandations" class="btn btn--primary">Refresh recommandations</a>
                 {{else}}
                 <h4 class="hero__title">Rate a minimum of <span>3 movies</span> and enjoy our <span>magical recommandations !</span></h4>
                 {{/if}}
-
             </div>
         </div>
     </section>
@@ -36,4 +35,5 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="/js/swiper.js"></script>
   <script src="/js/movie.js"></script>
+  <script src="/js/recommandations.js"></script>
 {{/extend}}

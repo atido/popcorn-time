@@ -16,12 +16,12 @@ async function getDashboardPage(req, res, next) {
     const watchListMovies = await movieService.getMovies(user.watchList);
     movieService.checkedActionIndicatorsMovies(user, watchListMovies);
 
-    const userMoviesRecommandations = await userService.getUserMoviesRecommandations(user.username);
+    const recommandations = await userService.getUserMoviesRecommandations(user.username);
 
     return res.render("dashboard", {
       featuredMovies,
       watchListMovies,
-      userMoviesRecommandations,
+      recommandations,
     });
   } catch (err) {
     console.log(err);
@@ -31,13 +31,13 @@ async function getDashboardPage(req, res, next) {
 
 async function refreshUserMoviesRecommandations(req, res, next) {
   try {
-    const userMoviesRecommandations = await userService.getUserMoviesRecommandations(
+    const recommandations = await userService.getUserMoviesRecommandations(
       req.session.currentUser.username
     );
 
     res.render("partials/recommandations/recommandationsmovies", {
       layout: false,
-      userMoviesRecommandations,
+      recommandations,
     });
   } catch (err) {
     console.log(err);
