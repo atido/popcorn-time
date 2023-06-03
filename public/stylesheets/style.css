@@ -16,6 +16,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 body {
@@ -67,6 +68,9 @@ a {
 .icon--red {
   color: var(--red-color);
 }
+.icon--white {
+  color: white;
+}
 img {
   display: block;
   width: auto;
@@ -116,6 +120,15 @@ img {
 .btn--red:hover {
   background-color: var(--red-color);
   color: white;
+}
+.btn--no-decoration {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 .error {
   background-color: var(--error-color-bg);
@@ -273,10 +286,48 @@ img {
 .header__signin:hover {
   text-decoration: underline;
 }
+.header__userInfo {
+  display: flex;
+  color: white;
+  gap: 0.5rem;
+  align-items: center;
+}
 .header__avatar {
   height: 30px;
 }
-
+.header__dropdown {
+  position: relative;
+  color: white;
+}
+.header__dropdown-menu {
+  display: flex;
+  font-size: 0.9rem;
+  flex-direction: column;
+  position: absolute;
+  right: -1rem;
+  top: calc(100% + 1rem);
+  background-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+.header__dropdown-element {
+  padding: 0.5rem 1rem;
+}
+.header__dropdown-element a {
+  color: white;
+}
+.header__dropdown-element a:hover {
+  text-decoration: underline;
+}
+.header__dropdown > .header__userInfo:focus + .header__dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu__separator {
+  border-top: solid 2px var(--secondary-color);
+}
 /*
 ███████  ██████   ██████  ████████ ███████ ██████  
 ██      ██    ██ ██    ██    ██    ██      ██   ██ 
@@ -388,6 +439,9 @@ img {
 .recommandations__movies .movie__poster {
   margin: 0;
   max-height: 100%;
+}
+#refreshRecommandations {
+  display: flex;
 }
 .recommandation-rate {
   display: flex;

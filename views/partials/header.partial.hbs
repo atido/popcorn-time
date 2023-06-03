@@ -26,11 +26,18 @@
   </div>
   <div class="header__user-nav">
     {{#if user}}
-      <a href="/dashboard"><img
+    <div class="header__dropdown">
+      <button class="header__userInfo btn--no-decoration"><img
           class="header__avatar avatar"
           src="{{user.avatar}}"
           alt="avatar"
-        /></a>
+        />
+        {{user.username}}</button>
+      <ul class="header__dropdown-menu">
+        <li class="header__dropdown-element"><a href="/dashboard">Dashboard</a></li>
+        <li class="header__dropdown-element menu__separator"><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </div>
     {{else}}
       <a class="header__signin" href="/auth/login">SIGN IN</a>
     {{/if}}
