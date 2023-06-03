@@ -12,6 +12,7 @@ class UserService {
     try {
       return await this.mongooseService.create(userToCreate);
     } catch (err) {
+      console.log(err);
       throw new Error("Error when creating user", err);
     }
   }
@@ -20,6 +21,7 @@ class UserService {
     try {
       return await this.mongooseService.findOne(query, projection);
     } catch (err) {
+      console.log(err);
       throw new Error("Error when finding user", err);
     }
   }
