@@ -295,9 +295,19 @@ img {
 .header__avatar {
   height: 30px;
 }
+
 .header__dropdown {
   position: relative;
   color: white;
+  display: none;
+}
+@media screen and (min-width: 1024px) {
+  .header__dropdown {
+    display: block;
+  }
+  .header__nav-mobile {
+    display: none;
+  }
 }
 .header__dropdown-menu {
   display: flex;
