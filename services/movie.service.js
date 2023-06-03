@@ -8,9 +8,9 @@ class MovieService {
 
   async getPopularMovies() {
     try {
-      const popularMoviesFromApi = await this.moviedb.moviePopular();
+      const popularMoviesFromApi = await this.moviedb.movieTopRated();
       return popularMoviesFromApi.results
-        .filter((movieFromApi) => movieFromApi.backdrop_path)
+        .filter((movieFromApi) => movieFromApi.backdrop_path && movieFromApi.vote_count > 300)
         .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
     } catch (err) {
       console.log(err);
@@ -59,7 +59,7 @@ class MovieService {
             movieFromApi.poster_path &&
             !movieFromApi.adult &&
             movieFromApi.vote_average > 5 &&
-            movieFromApi.vote_count > 200
+            movieFromApi.vote_count > 300
         )
         .map((movieFromApi) => MovieMapper.toMovieDTO(movieFromApi));
     } catch (err) {

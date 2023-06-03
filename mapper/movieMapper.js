@@ -20,6 +20,7 @@ class MovieMapper {
       poster_path,
       release_date,
       vote_average,
+      vote_count,
       genres,
       runtime,
     } = movieDetailFromApi;
@@ -37,6 +38,7 @@ class MovieMapper {
       vote_average: Math.round(vote_average * 10) / 10,
       genres: genres.map((genre) => genre.name),
       runtime: toHoursAndMinutes(runtime),
+      vote_count,
     };
   }
   static toMovieWatchProvidersDTO(movieProviderFromApi) {

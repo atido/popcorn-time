@@ -345,7 +345,7 @@ img {
 }
 .hero.welcome,
 .hero.welcome .hero__content {
-  height: 60vh;
+  height: calc(100vh - 4rem);
 }
 
 @media screen and (min-width: 768px) {
@@ -383,7 +383,7 @@ img {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 .recommandations__movies .movie__poster {
   margin: 0;

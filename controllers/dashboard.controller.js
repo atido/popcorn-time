@@ -34,7 +34,6 @@ async function refreshUserMoviesRecommandations(req, res, next) {
     const recommandations = await userService.getUserMoviesRecommandations(
       req.session.currentUser.username
     );
-
     res.render("partials/recommandations/recommandationsmovies", {
       layout: false,
       recommandations,

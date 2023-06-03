@@ -19,12 +19,8 @@
             </div>
         </div>
     </section>
-    {{#if watchListMovies}}
-    <section id="watchlist-movies">
-        <h2>Your Watchlist</h2>
-        {{>movieswiper.partial watchListMovies}}
-    </section>
-    {{/if}}
+
+    {{>watchlistpartial parameter=watchListMovies}}
     {{>featuredmovies.partial featuredMovies}}
 </div>
 

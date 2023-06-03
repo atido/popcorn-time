@@ -31,6 +31,6 @@ function initRecommandationsListener() {
         .catch((err) => {
           console.log(err);
         });
-    }, 500);
+    }, 400);
   });
 }
