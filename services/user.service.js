@@ -102,6 +102,7 @@ class UserService {
   async getUserPreferredMovies(username, length) {
     try {
       const userRates = await this.mongooseService.findOne({ username }, { rates: 1, _id: 0 });
+      if (userRates.rates.length < length) return [];
       const preferedMovies = userRates.rates
         .sort((a, b) => b.rate - a.rate)
         .slice(0, length)
