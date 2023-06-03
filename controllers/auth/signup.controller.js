@@ -17,7 +17,14 @@ async function createSignup(req, res, next) {
     if (foundUser) {
       return res.render("auth/signup", {
         layout: "layouts/auth",
-        message: "User already exists",
+        message: "email or username already exists",
+      });
+    }
+    const foundUsername = await userService.findOne({ username });
+    if (foundUsername) {
+      return res.render("auth/signup", {
+        layout: "layouts/auth",
+        message: "email or username already exists",
       });
     }
     const user = await userService.create({ email, password, username });
