@@ -11,23 +11,16 @@ async function createSignup(req, res, next) {
   const result = userService.validateSignup(email, password, username);
   if (!result.success)
     return res.render("auth/signup", { layout: "layouts/auth", message: result.message });
-  // Check the users collection if a user with the same email already exists and then create user
+
   try {
-    const foundUser = await userService.findOne({ email });
-    if (foundUser) {
+    const isUserExist = await userService.checkIfUserExist(username, email);
+    if (isUserExist) {
       return res.render("auth/signup", {
         layout: "layouts/auth",
         message: "email or username already exists",
       });
     }
-    const foundUsername = await userService.findOne({ username });
-    if (foundUsername) {
-      return res.render("auth/signup", {
-        layout: "layouts/auth",
-        message: "email or username already exists",
-      });
-    }
-    const user = await userService.create({ email, password, username });
+    const user = await userService.createUser(email, password, username);
     req.session.currentUser = {
       _id: user._id,
       email: user.email,

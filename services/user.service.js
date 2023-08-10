@@ -8,46 +8,111 @@ class UserService {
     this.movieService = new MovieService();
   }
 
-  async create(userToCreate) {
+  async createUser(email, password, username) {
     try {
-      return await this.mongooseService.create(userToCreate);
+      return await this.mongooseService.create({ email, password, username });
     } catch (err) {
-      console.log(err);
       throw new Error("Error when creating user", err);
     }
   }
 
-  async findOne(query, projection) {
+  async getUserByUsername(username) {
     try {
-      return await this.mongooseService.findOne(query, projection);
+      return await this.mongooseService.findOne({ username });
     } catch (err) {
-      console.log(err);
       throw new Error("Error when finding user", err);
     }
   }
 
-  async count(query) {
+  async getUserByEmail(email) {
     try {
-      return await this.mongooseService.count(query);
+      return await this.mongooseService.findOne({ email });
     } catch (err) {
-      throw new Error("Error when counting", err);
-    }
-  }
-
-  async findOneAndUpdate(query, body) {
-    try {
-      return await this.mongooseService.findOneAndUpdate(query, body);
-    } catch (err) {
-      console.log(err);
       throw new Error("Error when finding user", err);
     }
   }
 
-  async delete(id) {
+  async getUserById(id) {
     try {
-      return await this.mongooseService.delete(id);
+      return await this.mongooseService.findOne({ _id: id });
     } catch (err) {
-      throw new Error("Error when deleting user", err);
+      throw new Error("Error when finding user", err);
+    }
+  }
+
+  async toggleUserWatchHistory(username, movieId) {
+    try {
+      const result = await this.mongooseService.findOneAndUpdate({ username }, [
+        {
+          $set: {
+            watched: {
+              $cond: [
+                { $in: [movieId, "$watched"] },
+                { $setDifference: ["$watched", [movieId]] },
+                { $concatArrays: ["$watched", [movieId]] },
+              ],
+            },
+          },
+        },
+      ]);
+      return result?.watched?.includes(movieId);
+    } catch (err) {
+      throw new Error("Error when updating watch history", err);
+    }
+  }
+
+  async toggleUserWatchList(username, movieId) {
+    try {
+      const result = await this.mongooseService.findOneAndUpdate({ username }, [
+        {
+          $set: {
+            watchList: {
+              $cond: [
+                { $in: [movieId, "$watchList"] },
+                { $setDifference: ["$watchList", [movieId]] },
+                { $concatArrays: ["$watchList", [movieId]] },
+              ],
+            },
+          },
+        },
+      ]);
+      return result?.watchList?.includes(movieId);
+    } catch (err) {
+      throw new Error("Error when updating watch history", err);
+    }
+  }
+
+  async updateUserRateMovie(username, movieId, rate) {
+    try {
+      await this.mongooseService.findOneAndUpdate(
+        { username },
+        {
+          $pull: {
+            rates: { movieId: movieId },
+          },
+        }
+      );
+      const result = await this.mongooseService.findOneAndUpdate(
+        { username },
+        {
+          $push: {
+            rates: { movieId: movieId, rate },
+          },
+        }
+      );
+
+      return result.rates.find((rate) => rate.movieId == movieId)?.rate;
+    } catch (err) {
+      console.log(err);
+      throw new Error("Error when updating rate of movie", err);
+    }
+  }
+
+  async checkIfUserExist(username, email) {
+    try {
+      return await this.mongooseService.count({ $or: [{ username }, { email }] });
+    } catch (err) {
+      throw new Error("Error when checking if user exist", err);
     }
   }
 

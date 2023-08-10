@@ -21,7 +21,7 @@ async function getMovieDetail(req, res, next) {
     movie.actors = await movieService.getMovieActors(req.params.id);
     movie.watchProviders = await movieService.getMovieWatchProviders(req.params.id);
     if (req.session.currentUser) {
-      user = await userService.findOne({ username: req.session.currentUser.username });
+      user = await userService.getUserByUsername(req.session.currentUser.username);
       movieService.checkedActionIndicatorsMovies(user, [movie]);
     }
     return res.render("movie/movieDetail", { movie, headerPosition: "fixed" });
@@ -35,28 +35,16 @@ async function addToWatchHistory(req, res, next) {
     const movieId = req.params.id;
     const { isBtn } = req.body;
 
-    await userService.findOneAndUpdate({ username: req.session.currentUser.username }, [
-      {
-        $set: {
-          watched: {
-            $cond: [
-              { $in: [movieId, "$watched"] },
-              { $setDifference: ["$watched", [movieId]] },
-              { $concatArrays: ["$watched", [movieId]] },
-            ],
-          },
-        },
-      },
-    ]);
-    const watched =
-      (await userService.count({
-        $and: [{ username: req.session.currentUser.username }, { watched: { $in: [movieId] } }],
-      })) > 0;
+    const isMovieWatched = await userService.toggleUserWatchHistory(
+      req.session.currentUser.username,
+      movieId
+    );
+
     res.status(200);
     res.render(isBtn ? "partials/buttons/buttonwatch" : "partials/buttons/iconwatch", {
       layout: false,
       id: movieId,
-      watched,
+      watched: isMovieWatched,
     });
   } catch (err) {
     console.log(err);
@@ -68,27 +56,14 @@ async function addToWatchList(req, res, next) {
   try {
     const movieId = req.params.id;
     const { isBtn } = req.body;
-    await userService.findOneAndUpdate({ username: req.session.currentUser.username }, [
-      {
-        $set: {
-          watchList: {
-            $cond: [
-              { $in: [movieId, "$watchList"] },
-              { $setDifference: ["$watchList", [movieId]] },
-              { $concatArrays: ["$watchList", [movieId]] },
-            ],
-          },
-        },
-      },
-    ]);
-    const watchList =
-      (await userService.count({
-        $and: [{ username: req.session.currentUser.username }, { watchList: { $in: [movieId] } }],
-      })) > 0;
+    const isMovieInWatchList = await userService.toggleUserWatchList(
+      req.session.currentUser.username,
+      movieId
+    );
     res.render(isBtn ? "partials/buttons/buttonwatchlist" : "partials/buttons/iconwatchlist", {
       layout: false,
       id: movieId,
-      watchList,
+      watchList: isMovieInWatchList,
     });
     res.status(200);
   } catch (err) {
@@ -100,35 +75,16 @@ async function rateMovie(req, res, next) {
   try {
     const movieId = req.params.id;
     const { rate, isBtn } = req.body;
-    await userService.findOneAndUpdate(
-      { username: req.session.currentUser.username },
-      {
-        $pull: {
-          rates: { movieId: movieId },
-        },
-      }
+    const userRateForMovie = await userService.updateUserRateMovie(
+      req.session.currentUser.username,
+      movieId,
+      rate
     );
-    await userService.findOneAndUpdate(
-      { username: req.session.currentUser.username },
-      {
-        $push: {
-          rates: { movieId: movieId, rate },
-        },
-      }
-    );
-    const results = await userService.findOne(
-      {
-        $and: [
-          { username: req.session.currentUser.username },
-          { rates: { $elemMatch: { movieId: movieId } } },
-        ],
-      },
-      { "rates.$": 1, _id: 0 }
-    );
+
     res.render(isBtn ? "partials/buttons/buttonrate" : "partials/buttons/iconrate", {
       layout: false,
       id: movieId,
-      userRate: results?.rates[0]?.rate,
+      userRate: userRateForMovie,
     });
     res.status(200);
   } catch (err) {

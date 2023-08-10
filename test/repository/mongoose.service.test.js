@@ -1,4 +1,4 @@
-const MongooseService = require("../../services/mongoose.service");
+const MongooseService = require("../../repository/mongoose.service");
 const mongoose = require("mongoose");
 
 beforeAll(async () => {
@@ -88,6 +88,20 @@ describe("MongooseService", () => {
       expect(result.name).toEqual("Updated");
       const updatedDoc = await Model.findById(doc._id);
       expect(updatedDoc.name).toEqual("Updated");
+    });
+  });
+  describe("count", () => {
+    it("should count one document in the database by query", async () => {
+      await Model.create({ name: "Test" });
+      const result = await service.count({ name: "Test" });
+      expect(result).toBeDefined();
+      expect(result).toEqual(1);
+    });
+    it("should count 0 document in the database by query", async () => {
+      await Model.create({ name: "Test2" });
+      const result = await service.count({ name: "Test" });
+      expect(result).toBeDefined();
+      expect(result).toEqual(0);
     });
   });
 });

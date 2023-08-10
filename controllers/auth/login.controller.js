@@ -18,7 +18,7 @@ async function login(req, res, next) {
     });
 
   try {
-    const foundUser = await userService.findOne({ email });
+    const foundUser = await userService.getUserByEmail(email);
     if (foundUser && bcrypt.compareSync(password, foundUser.password)) {
       const { _id, email, username, avatar = "/images/avatar.png" } = foundUser;
       req.session.currentUser = { _id, email, username, avatar };

@@ -13,7 +13,7 @@ function getRequestResetForm(req, res, next) {
 
 async function requestPasswordReset(req, res, next) {
   try {
-    const user = await userService.findOne({ email: req.body.email });
+    const user = await userService.getUserByEmail(req.body.email);
     if (!user) {
       return res.render("auth/reset-request", {
         layout: "layouts/auth",
@@ -21,13 +21,13 @@ async function requestPasswordReset(req, res, next) {
       });
     }
 
-    const token = await tokenService.findOne({ userId: user._id });
+    const token = await tokenService.getTokenByUserId(user._id);
     if (token) await token.deleteOne();
 
     const resetToken = crypto.randomBytes(32).toString("hex");
     const hash = await bcrypt.hash(resetToken, Number(process.env.BCRYPT_SALT));
 
-    await tokenService.create({ userId: user.id, token: hash, createdAt: Date.now() });
+    await tokenService.createToken(user.id, hash, Date.now());
     const link = `${process.env.CLIENT_URL}/auth/resetPassword?token=${resetToken}&id=${user._id}`;
 
     await emailService.sendEmail(user.email, link);
@@ -43,9 +43,9 @@ async function requestPasswordReset(req, res, next) {
 }
 async function getNewPasswordForm(req, res, next) {
   try {
-    const { id, token } = req.query;
+    const { id: userId, token } = req.query;
 
-    let passwordResetToken = await tokenService.findOne({ userId: id });
+    let passwordResetToken = await tokenService.getByUserId(userId);
     if (!passwordResetToken) {
       return res.render("auth/reset-invalidate", {
         layout: "layouts/auth",
@@ -59,7 +59,7 @@ async function getNewPasswordForm(req, res, next) {
         message: "Invalid or expired password reset token",
       });
     }
-    const user = await userService.findOne({ _id: id });
+    const user = await userService.getUserByParameter(id);
     if (!user) {
       return res.render("auth/reset-invalidate", {
         layout: "layouts/auth",
@@ -84,7 +84,7 @@ async function resetPassword(req, res, next) {
     if (!result.success)
       return res.render("auth/new-password", { layout: "layouts/auth", message: result.message });
 
-    const user = await userService.findOne({ email: emailFromSession });
+    const user = await userService.getUserByEmail(emailFromSession);
     user.password = password1;
     user.save();
     const { _id, email, username, avatar = "/images/avatar.png" } = user;

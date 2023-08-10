@@ -6,17 +6,17 @@ class TokenService {
     this.mongooseService = new MongooseService(TokenModel);
   }
 
-  async create(tokenToCreate) {
+  async createToken(userId, token, createdAt) {
     try {
-      return await this.mongooseService.create(tokenToCreate);
+      return await this.mongooseService.create({ userId, token, createdAt });
     } catch (err) {
       throw new Error("Error when creating token", err);
     }
   }
 
-  async findOne(query) {
+  async getTokenByUserId(userId) {
     try {
-      return await this.mongooseService.findOne(query);
+      return await this.mongooseService.findOne({ userId });
     } catch (err) {
       throw new Error("Error when finding token", err);
     }
