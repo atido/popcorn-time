@@ -6,7 +6,8 @@ const movieService = new MovieService();
 async function getDashboardPage(req, res, next) {
   try {
     const featuredMovies = {};
-    const user = await userService.findOne({ username: req.session.currentUser.username });
+    console.log("getDashboard for Session ID :', sessionId, :", req.sessionID);
+    const user = await userService.getUserByUsername(req.session.currentUser.username);
     featuredMovies.popularMovies = await movieService.getPopularMovies();
     movieService.checkedActionIndicatorsMovies(user, featuredMovies.popularMovies);
 
